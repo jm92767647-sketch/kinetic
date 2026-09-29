@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {exercises,days,muscles,abilities,principles,trainingGroups,matchesTrainingGroup,regionMuscles} from '../src/data.js';
+test('31 complete records with unique IDs and valid tags',()=>{
+ assert.equal(exercises.length,31);assert.equal(new Set(exercises.map(e=>e.id)).size,31);
+ for(const e of exercises){assert.ok(days[e.day]);for(const key of ['name','dose','rest','motion'])assert.ok(e[key],`${e.id}: ${key}`);for(const key of ['steps','progress','stop','cues','primary','regions','tags'])assert.ok(e[key].length,`${e.id}: ${key}`);for(const m of [...e.primary,...e.secondary])assert.ok(muscles.includes(m),m);for(const t of e.tags){assert.ok(abilities.includes(t),t);assert.ok(principles[t],t)}}
+});
+test('nine alternatives each reference a same-day original',()=>{
+ const alternatives=exercises.filter(e=>e.parent);assert.equal(alternatives.length,9);
+ for(const e of alternatives){const parent=exercises.find(p=>p.id===e.parent);assert.ok(parent);assert.equal(parent.parent,null);assert.equal(e.day,parent.day)}
+});
+test('all five days contain the requested original and alternative counts',()=>assert.deepEqual(days.map((_,i)=>exercises.filter(e=>e.day===i).length),[4,14,5,7,1]));
+test('requested combined filter examples match',()=>{
+ const lower=exercises.filter(e=>e.regions.includes('하체')&&e.primary.includes('햄스트링')&&e.tags.includes('감속')).map(e=>e.id);assert.ok(lower.includes('nordic'));assert.ok(lower.includes('decel'));
+ const upper=exercises.filter(e=>e.regions.includes('상체')&&e.primary.includes('가슴')&&e.tags.some(t=>t.includes('파워'))).map(e=>e.id);assert.ok(upper.includes('chest'));assert.ok(upper.includes('explosive'));
+});
+test('minimal training groups preserve detailed note tags',()=>{
+ assert.deepEqual(Object.keys(trainingGroups),['파워','최대근력','가속','감속','지구력 안정성']);
+ const get=id=>exercises.find(e=>e.id===id);
+ for(const e of exercises)assert.ok(Object.keys(trainingGroups).some(g=>matchesTrainingGroup(e,g)),e.id);
+ for(const id of ['split','rotation','chest','press','cmj','trapjump'])assert.ok(matchesTrainingGroup(get(id),'파워'));
+ assert.ok(matchesTrainingGroup(get('flying'),'가속'));
+ for(const id of ['nordic','reverse','lateral'])assert.ok(matchesTrainingGroup(get(id),'감속'));
+ for(const id of ['interval','boxing','run','ab','face','external'])assert.ok(matchesTrainingGroup(get(id),'지구력 안정성'));
+ assert.ok(get('nordic').tags.includes('편심근력'));
+ assert.ok(get('lateral').tags.includes('방향전환'));
+ assert.ok(get('face').tags.includes('견갑·관절 안정성'));
+});
+test('region subcategories contain valid, relevant muscles only',()=>{
+ assert.deepEqual(Object.keys(regionMuscles),['하체','상체','코어','전신']);
+ assert.ok(!regionMuscles['하체'].includes('가슴'));
+ assert.ok(!regionMuscles['상체'].includes('햄스트링'));
+ for(const [region,list] of Object.entries(regionMuscles)){
+  for(const muscle of list){assert.ok(muscles.includes(muscle));assert.ok(exercises.some(e=>e.regions.includes(region)&&[...e.primary,...e.secondary].includes(muscle)),region+': '+muscle)}
+ }
+});
