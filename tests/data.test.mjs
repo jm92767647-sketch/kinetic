@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {exercises,days,muscles,abilities,principles,trainingGroups,matchesTrainingGroup,regionMuscles} from '../src/data.js';
-test('31 complete records with unique IDs and valid tags',()=>{
- assert.equal(exercises.length,31);assert.equal(new Set(exercises.map(e=>e.id)).size,31);
+test('39 complete records with unique IDs and valid tags',()=>{
+ assert.equal(exercises.length,39);assert.equal(new Set(exercises.map(e=>e.id)).size,39);
  for(const e of exercises){assert.ok(days[e.day]);for(const key of ['name','dose','rest','motion'])assert.ok(e[key],`${e.id}: ${key}`);for(const key of ['steps','progress','stop','cues','primary','regions','tags'])assert.ok(e[key].length,`${e.id}: ${key}`);for(const m of [...e.primary,...e.secondary])assert.ok(muscles.includes(m),m);for(const t of e.tags){assert.ok(abilities.includes(t),t);assert.ok(principles[t],t)}}
 });
 test('nine alternatives each reference a same-day original',()=>{
  const alternatives=exercises.filter(e=>e.parent);assert.equal(alternatives.length,9);
  for(const e of alternatives){const parent=exercises.find(p=>p.id===e.parent);assert.ok(parent);assert.equal(parent.parent,null);assert.equal(e.day,parent.day)}
 });
-test('all five days contain the requested original and alternative counts',()=>assert.deepEqual(days.map((_,i)=>exercises.filter(e=>e.day===i).length),[4,14,5,7,1]));
+test('all six days contain the requested original and alternative counts',()=>assert.deepEqual(days.map((_,i)=>exercises.filter(e=>e.day===i).length),[6,10,5,8,7,3]));
 test('requested combined filter examples match',()=>{
  const lower=exercises.filter(e=>e.regions.includes('하체')&&e.primary.includes('햄스트링')&&e.tags.includes('감속')).map(e=>e.id);assert.ok(lower.includes('nordic'));assert.ok(lower.includes('decel'));
  const upper=exercises.filter(e=>e.regions.includes('상체')&&e.primary.includes('가슴')&&e.tags.some(t=>t.includes('파워'))).map(e=>e.id);assert.ok(upper.includes('chest'));assert.ok(upper.includes('explosive'));
@@ -33,4 +33,13 @@ test('region subcategories contain valid, relevant muscles only',()=>{
  for(const [region,list] of Object.entries(regionMuscles)){
   for(const muscle of list){assert.ok(muscles.includes(muscle));assert.ok(exercises.some(e=>e.regions.includes(region)&&[...e.primary,...e.secondary].includes(muscle)),region+': '+muscle)}
  }
+});
+
+test('six-day exercise order and alternative relationships',()=>{
+ assert.deepEqual(days,['하체 파워·근력','상체 A · 수직','가속·감속','상체 B · 수평','최고속도·탄성','컨디셔닝']);
+ const order=[['ankle','reach3','split','trap','nordic'],['wristrock','rotation','press','ohp','pullup','face','hammer'],['decel','lateral','reverse','thoracic','proney'],['external','chest','bench','ab','wristpress'],['flying','cmj','depth','trapjump','front'],['interval','boxing','run']];
+ for(let day=0;day<6;day++)assert.deepEqual(exercises.filter(e=>e.day===day&&!e.parent).map(e=>e.id),order[day]);
+ assert.deepEqual(Object.fromEntries(exercises.filter(e=>e.parent).map(e=>[e.id,e.parent])),{rdl:'trap',scoop:'rotation',pike:'ohp',bandface:'face',bandexternal:'external',explosive:'chest',hardpush:'bench',dbjump:'trapjump',heavybulgarian:'front'});
+ assert.ok(!exercises.some(e=>e.id==='pistol'||e.parent==='press'||e.parent==='pullup'));
+ assert.deepEqual(exercises.find(e=>e.id==='pike').tags,['최대근력']);
 });

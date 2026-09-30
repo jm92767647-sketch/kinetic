@@ -2,10 +2,10 @@ import React from 'react';
 
 // Original articulated SVG anatomy, inspired by the supplied front/back muscle atlas.
 // Every muscle shape moves in the local coordinate system of its anatomical segment.
-export default function MuscleFigure({points:p,exercise:e}){
+export default function MuscleFigure({points:p,exercise:e,handTurn=0,handBack=false}){
  const base='#639dd9',primary='#e34c54',secondary='#ef9b45',seam='#e6f2ff',outline='#4d83b5';
- const fill=tags=>tags.some(t=>e.primary.includes(t))?primary:tags.some(t=>e.secondary.includes(t))?secondary:base;
- const back=['nordic','rdl','pullup','face','bandface'].includes(e.motion);
+ const fill=tags=>tags.includes('전완')&&e.highlightForearms?primary:tags.some(t=>e.primary.includes(t))?primary:tags.some(t=>e.secondary.includes(t))?secondary:base;
+ const back=['nordic','rdl','pullup','face','bandface','proney','thoracic'].includes(e.motion);
  const dx=p.p[0]-p.s[0],dy=p.p[1]-p.s[1],length=Math.hypot(dx,dy)||1;
  const normal=[dy/length,-dx/length];
  const offset=(point,n)=>[point[0]+normal[0]*n,point[1]+normal[1]*n];
@@ -23,8 +23,8 @@ export default function MuscleFigure({points:p,exercise:e}){
   </>}
   {type==='forearm'&&<>
    <path d="M-7 0Q-14 18-9 43L-4 97Q0 102 4 97L9 44Q14 18 7 0Z" fill={base} stroke={outline} strokeWidth=".7"/>
-   {muscle('M-6 5Q-12 24-7 45L-1 90L0 38Z',[],'flexor')}
-   {muscle('M4 3Q12 15 8 41L2 91L1 35Z',[],'extensor')}
+   {muscle('M-6 5Q-12 24-7 45L-1 90L0 38Z',['전완'],'flexor')}
+   {muscle('M4 3Q12 15 8 41L2 91L1 35Z',['전완'],'extensor')}
    <path d="M-2 48L-1 94M5 44L2 95" fill="none" stroke={seam} strokeWidth=".9"/>
   </>}
   {type==='thigh'&&<>
@@ -49,10 +49,10 @@ export default function MuscleFigure({points:p,exercise:e}){
   const bone=Math.max(52,distance/2+.01),height=Math.sqrt(Math.max(0,bone*bone-distance*distance/4));
   const middle=[(s[0]+hand[0])/2,(s[1]+hand[1])/2];
   const candidates=[1,-1].map(sign=>[middle[0]+sign*vy/distance*height,middle[1]-sign*vx/distance*height]);
-  const outward=side==='l'?-1:1;const score=q=>outward*((q[0]-s[0])*normal[0]+(q[1]-s[1])*normal[1]);const el=score(candidates[0])>=score(candidates[1])?candidates[0]:candidates[1];
-  return <g key={side}>{segment(s,el,'arm',side+'a')}{segment(el,hand,'forearm',side+'f')}<g transform={`translate(${hand}) rotate(${Math.atan2(hand[1]-el[1],hand[0]-el[0])*180/Math.PI-90})`}><path d="M-4-3L-7 2L-10 6Q-11 9-8 9L-5 7L-4 18Q-2 21-1 18L0 9L1 21Q3 22 3 19L3 9L5 19Q7 20 7 17L6 6L6-2Z" fill="#80b3e7" stroke={outline} strokeWidth=".6"/></g></g>
+  const outward=side==='l'?-1:1;const score=q=>outward*((q[0]-s[0])*normal[0]+(q[1]-s[1])*normal[1]);const el=e.explicitElbows?p[side==='l'?'el':'er']:score(candidates[0])>=score(candidates[1])?candidates[0]:candidates[1];
+  return <g key={'arm-'+side}>{segment(s,el,'arm',side+'a')}{segment(el,hand,'forearm',side+'f')}<g transform={`translate(${hand}) rotate(${Math.atan2(hand[1]-el[1],hand[0]-el[0])*180/Math.PI-90+(side==='l'?handTurn:0)}) scale(${handBack?-1:1} 1)`}><path d="M-4-3L-7 2L-10 6Q-11 9-8 9L-5 7L-4 18Q-2 21-1 18L0 9L1 21Q3 22 3 19L3 9L5 19Q7 20 7 17L6 6L6-2Z" fill="#80b3e7" stroke={outline} strokeWidth=".6"/></g></g>
  }
- function leg(side){const hip=side==='l'?hipL:hipR,knee=p[side==='l'?'kl':'kr'],foot=p[side==='l'?'fl':'fr'];return <g key={side}>{segment(hip,knee,'thigh',side+'t')}{segment(knee,foot,'calf',side+'c')}<path d={`M${foot[0]-5} ${foot[1]-6}q5 1 9 5l12 4q5 5-1 7h-22q-4-1-3-6Z`} fill="#80b3e7" stroke={outline} strokeWidth=".7"/></g>}
+ function leg(side){const hip=side==='l'?hipL:hipR,knee=p[side==='l'?'kl':'kr'],foot=p[side==='l'?'fl':'fr'];return <g key={'leg-'+side}>{segment(hip,knee,'thigh',side+'t')}{segment(knee,foot,'calf',side+'c')}<path d={`M${foot[0]-5} ${foot[1]-6}q5 1 9 5l12 4q5 5-1 7h-22q-4-1-3-6Z`} fill="#80b3e7" stroke={outline} strokeWidth=".7"/></g>}
  return <g className="muscle-figure" data-anatomy-view={back?'posterior':'anterior'}>
   {leg('r')}{leg('l')}
   <g transform={transform(p.s,p.p)}>

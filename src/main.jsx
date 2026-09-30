@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import{createRoot}from'react-dom/client';
-import{days,regionMuscles,trainingGroups,matchesTrainingGroup,principles,exercises,powerWarning,progressionType}from'./data';
+import{days,conditioningPlan,regionMuscles,trainingGroups,matchesTrainingGroup,principles,exercises,powerWarning,progressionType}from'./data';
 import Anatomy from './Anatomy';
 import './styles.css';
 const isPower=e=>e.tags.some(t=>t.includes('파워'));
@@ -12,7 +12,7 @@ function Details({e,select,nested=false}){return <article className={nested?'alt
  <div className="prescription"><div><span>기본 운동량</span><strong>{e.dose}</strong></div><div><span>{e.id==='run'?'운동 강도':'휴식'}</span><strong>{e.rest}</strong></div></div>
  {e.id==='nordic'&&<p className="hint">적응 후 필요하면 3세트로 늘립니다.</p>}
  {e.id==='hardpush'&&<p className="hint">각 단계에서 8회가 안정적으로 가능하면 다음 단계로 이동합니다.</p>}
- <section className="purpose"><h3>목적 & 수행 원칙</h3>{e.tags.map(t=><p key={t}><b>{t}</b> {principles[t]}</p>)}</section>
+ <section className="purpose"><h3>목적 & 수행 원칙</h3>{e.purposeOverride?<p><b>{e.tags.join(' · ')}</b> {e.purpose}</p>:e.tags.map(t=><p key={t}><b>{t}</b> {principles[t]}</p>)}</section>
  {isPower(e)&&<div className="warning"><span>!</span><p>{powerWarning}</p></div>}
  <section><h3>수행방법</h3><ol className="instructions">{e.steps.map((s,i)=><li key={i}>{s}</li>)}</ol></section>
  <section className="cues"><h3>핵심 자세 포인트</h3>{e.cues.map(c=><p key={c}>✓ {c}</p>)}</section>
@@ -24,15 +24,15 @@ function Details({e,select,nested=false}){return <article className={nested?'alt
 function App(){
  const [mode,setMode]=useState('데이별');
  const [day,setDay]=useState(0),[region,setRegion]=useState(''),[muscle,setMuscle]=useState(''),[ability,setAbility]=useState('');
- const [selected,setSelected]=useState('split');
+ const [selected,setSelected]=useState('ankle');
  const filters={mode,day,region,muscle,ability};
  const match=(x,f=filters)=>f.mode==='데이별'?(f.day===null||x.day===f.day):f.mode==='부위별'?(!f.region||x.regions.includes(f.region))&&(!f.muscle||[...x.primary,...x.secondary].includes(f.muscle)):matchesTrainingGroup(x,f.ability);
  const visible=exercises.filter(x=>match(x));
  const e=visible.find(x=>x.id===selected)||visible[0];
  const choose=id=>{setSelected(id);if(innerWidth<=700)requestAnimationFrame(()=>document.querySelector('.center')?.scrollIntoView({behavior:'smooth',block:'start'}))};
  const apply=(key,value)=>{({day:setDay,region:setRegion,muscle:setMuscle,ability:setAbility})[key](value);if(key==='region')setMuscle('');const next=exercises.filter(x=>match(x,{...filters,[key]:value,...(key==='region'?{muscle:''}:{})}));if(next.length&&!next.some(x=>x.id===selected))setSelected(next[0].id)};
- const reset=()=>{setDay(null);setRegion('');setMuscle('');setAbility('');setSelected('split')};
- const view=m=>{setMode(m);setDay(m==='데이별'?0:null);setRegion('');setMuscle('');setAbility('');setSelected('split')};
+ const reset=()=>{setDay(null);setRegion('');setMuscle('');setAbility('');setSelected('ankle')};
+ const view=m=>{setMode(m);setDay(m==='데이별'?0:null);setRegion('');setMuscle('');setAbility('');setSelected('ankle')};
  const showRelated=id=>{const target=exercises.find(x=>x.id===id);if(!match(target)){if(mode==='부위별'){setRegion('');setMuscle('')}else if(mode==='훈련능력별')setAbility('')}choose(id)};
  const alternatives=e?exercises.filter(x=>x.parent===e.id):[];
  const parent=e?.parent&&exercises.find(x=>x.id===e.parent);
@@ -49,7 +49,7 @@ function App(){
     {!visible.length&&<div className="empty"><p>일치하는 운동이 없습니다.</p><button onClick={reset}>필터 초기화</button></div>}
    </aside>
    {e?<><div className="center"><a className="mobile-exercise-jump" href="#exercise-browser">운동 선택 ↓</a><Anatomy key={e.id} exercise={e}/></div>
-    <aside className="detail"><h2 className="notes-heading">운동 노트</h2>{parent&&<button className="parent-link" onClick={()=>showRelated(parent.id)}>← {parent.name}</button>}<Details e={e} select={showRelated}/>{alternatives.map(a=><Details key={a.id} e={a} select={showRelated} nested/>)}</aside></>:<div className="no-results"><p>다른 부위나 근육을 선택해 보세요.</p></div>}
+    <aside className="detail"><h2 className="notes-heading">운동 노트</h2>{parent&&<button className="parent-link" onClick={()=>showRelated(parent.id)}>← {parent.name}</button>}{e.day===5&&<section className="purpose" aria-label="컨디셔닝 주간 구성"><h3>컨디셔닝 · A/B주 교대</h3>{conditioningPlan.weeks.map(w=><p key={w.name}><b>{w.name}</b> {w.text}</p>)}<p>{conditioningPlan.note}</p></section>}<Details e={e} select={showRelated}/>{alternatives.map(a=><Details key={a.id} e={a} select={showRelated} nested/>)}</aside></>:<div className="no-results"><p>다른 부위나 근육을 선택해 보세요.</p></div>}
   </main>
   <footer>동작 이해를 위한 2차원 가이드</footer>
  </>;

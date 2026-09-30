@@ -36,13 +36,45 @@ const faces0={...stand,el:[294,158],hl:[344,164],er:[293,181],hr:[344,175]};
 const faces1={...stand,el:[194,182],hl:[221,137],er:[296,182],hr:[267,137]};
 const external0={...stand,el:[207,228],hl:[248,228],er:[281,228],hr:[320,228]};
 const external1={...external0,hl:[157,228]};
-function frames(m){switch(m){case'split':return [split0,split1,split2,split1,split0];case'rdl':return[stand,rdl,rdl,stand,stand];case'nordic':return[kneel,nordic,nordic,kneel,kneel];case'reverse':return[kneel,reverse,reverse,kneel,kneel];case'pushup':return[push0,push1,{...push0,hl:[180,366],hr:[217,366]},push0,push0];case'pike':return[pike0,pike1,pike0,pike0,pike0];case'rollout':return[kneel,rollout,rollout,kneel,kneel];case'pullup':return[hang,hang,pulled,pulled,hang];case'bench':return[bench0,bench1,bench1,bench0,bench0];case'press':return[rack,{...rack,h:[245,128],s:[245,168],p:[237,278],kl:[211,331],kr:[278,331],el:[206,204],hl:[219,163],er:[285,204],hr:[270,163]},overhead,overhead,rack];case'rotation':case'scoop':return[rotation0,rotation0,rotation1,rotation1,rotation0];case'chest':return[rack,rack,reach,reach,rack];case'face':case'bandface':return[faces0,faces0,faces1,faces1,faces0];case'external':case'bandexternal':return[external0,external0,external1,external1,external0];case'pistol':return[pistol0,pistol1,pistol1,pistol0,pistol0];case'boxing':return[rack,{...reach,hr:[260,148]},rack,{...reach,hl:[250,144]},rack];case'run':case'sprint':case'flying':case'decel':return[runA,runB,runA,runB,runA];case'lateral':return[split0,split1,{...jump,p:[280,210]},split1,split0];case'depth':return[stand,squat,jump,squat,stand];case'deadlift':return[stand,{...squat,hl:[218,350],hr:[291,350]},stand,stand,stand];case'squat':return[rack,squat,squat,rack,rack];case'trapjump':case'dbjump':return[stand,{...squat,hl:[205,342],hr:[315,342]},{...jump,el:[207,155],hl:[206,204],er:[283,155],hr:[284,204]},squat,stand];default:return[stand,squat,jump,squat,stand];}}
+
+// Added motions reuse the same articulated pose interpolation and SVG equipment.
+const ankle0=pose([246,116],[246,156],[265,267],[204,207],[191,255],[282,208],[295,253],[210,317],[207,393],[305,327],[330,393]);
+const ankle1={...ankle0,h:[225,127],s:[225,167],p:[247,278],kl:[171,335],el:[185,218],hl:[173,265],er:[263,219],hr:[279,264]};
+const balance={...stand,kr:[286,323],fr:[289,365],el:[177,175],hl:[128,186],er:[313,175],hr:[362,186]};
+const reachFront={...balance,kr:[299,327],fr:[347,393]};
+const reachIn={...balance,kr:[208,329],fr:[166,373]};
+const reachOut={...balance,kr:[303,321],fr:[357,371]};
+const fourPoint=pose([152,244],[190,274],[298,278],[186,328],[184,391],[220,328],[219,391],[311,375],[371,395],[337,375],[397,395]);
+const wristForward={...fourPoint,h:[132,244],s:[170,274],p:[278,278],el:[172,330],er:[205,330]};
+const wristBack={...fourPoint,h:[168,244],s:[206,274],p:[314,278],el:[196,330],er:[230,330]};
+const wristLeft={...fourPoint,s:[179,276],h:[141,246],el:[174,331],er:[208,331]};
+const wristRight={...fourPoint,s:[201,276],h:[163,246],el:[198,331],er:[232,331]};
+const hammerPose={...stand,el:[216,215],hl:[161,215],er:[274,211],hr:[278,255]};
+const thoracic0=pose([190,290],[221,307],[317,324],[198,347],[183,391],[226,273],[189,280],[332,378],[374,395],[353,378],[395,395]);
+const thoracic1={...thoracic0,h:[203,266],s:[232,288],er:[265,226],hr:[202,257]};
+const prone0=pose([138,366],[180,376],[286,380],[129,352],[78,331],[154,318],[115,273],[352,385],[415,391],[353,365],[421,369]);
+const prone1={...prone0,h:[138,345],s:[180,356],el:[129,327],hl:[78,306],er:[154,293],hr:[115,248]};
+const heavy0={...split0,el:[209,201],hl:[207,249],er:[281,201],hr:[285,249]};
+const heavy1={...split1,el:[194,249],hl:[194,298],er:[266,249],hr:[270,298]};
+const addedFrames={
+ ankle:[ankle0,ankle1,ankle1,ankle0,ankle0],
+ reach3:[balance,reachFront,balance,reachIn,balance,reachOut,balance],
+ wristrock:[fourPoint,wristForward,fourPoint,wristBack,fourPoint,wristLeft,fourPoint,wristRight,fourPoint],
+ wristpress:[fourPoint,wristForward,wristForward,fourPoint,fourPoint],
+ hammer:[hammerPose,hammerPose,hammerPose,hammerPose,hammerPose],
+ strictpress:[rack,overhead,overhead,rack,rack],
+ thoracic:[thoracic0,thoracic1,thoracic1,thoracic0,thoracic0],
+ proney:[prone0,prone1,prone1,prone0,prone0],
+ heavybulgarian:[heavy0,heavy1,heavy1,heavy0,heavy0],
+};
+
+function frames(m){if(addedFrames[m])return addedFrames[m];switch(m){case'split':return [split0,split1,split2,split1,split0];case'rdl':return[stand,rdl,rdl,stand,stand];case'nordic':return[kneel,nordic,nordic,kneel,kneel];case'reverse':return[kneel,reverse,reverse,kneel,kneel];case'pushup':return[push0,push1,{...push0,hl:[180,366],hr:[217,366]},push0,push0];case'pike':return[pike0,pike1,pike0,pike0,pike0];case'rollout':return[kneel,rollout,rollout,kneel,kneel];case'pullup':return[hang,hang,pulled,pulled,hang];case'bench':return[bench0,bench1,bench1,bench0,bench0];case'press':return[rack,{...rack,h:[245,128],s:[245,168],p:[237,278],kl:[211,331],kr:[278,331],el:[206,204],hl:[219,163],er:[285,204],hr:[270,163]},overhead,overhead,rack];case'rotation':case'scoop':return[rotation0,rotation0,rotation1,rotation1,rotation0];case'chest':return[rack,rack,reach,reach,rack];case'face':case'bandface':return[faces0,faces0,faces1,faces1,faces0];case'external':case'bandexternal':return[external0,external0,external1,external1,external0];case'pistol':return[pistol0,pistol1,pistol1,pistol0,pistol0];case'boxing':return[rack,{...reach,hr:[260,148]},rack,{...reach,hl:[250,144]},rack];case'run':case'sprint':case'flying':case'decel':return[runA,runB,runA,runB,runA];case'lateral':return[split0,split1,{...jump,p:[280,210]},split1,split0];case'depth':return[stand,squat,jump,squat,stand];case'deadlift':return[stand,{...squat,hl:[218,350],hr:[291,350]},stand,stand,stand];case'squat':return[rack,squat,squat,rack,rack];case'trapjump':case'dbjump':return[stand,{...squat,hl:[205,342],hr:[315,342]},{...jump,el:[207,155],hl:[206,204],er:[283,155],hr:[284,204]},squat,stand];default:return[stand,squat,jump,squat,stand];}}
 const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
 export default function Anatomy({exercise:e}){
  const [speed,setSpeed]=useState(()=>matchMedia("(prefers-reduced-motion: reduce)").matches?0:1),[time,setTime]=useState(0);const uid=useId().replaceAll(':','');
  useEffect(()=>{setTime(0)},[e.id]);
  useEffect(()=>{let handle,last;const tick=now=>{if(last&&speed){const delta=Math.max(0,Math.min(now-last,80))*speed/4800;setTime(t=>(t+delta)%1)}last=now;handle=requestAnimationFrame(tick)};handle=requestAnimationFrame(tick);return()=>cancelAnimationFrame(handle)},[speed]);
- const f=frames(e.motion),v=((time%1+1)%1)*4,i=Math.min(3,Math.floor(v)),t=(1-Math.cos((v-i)*Math.PI))/2,p=Object.fromEntries(Object.keys(stand).map(k=>[k,mix(f[i][k],f[i+1][k],t)]));
+ const f=frames(e.motion),v=((time%1+1)%1)*(f.length-1),i=Math.min(f.length-2,Math.floor(v)),t=(1-Math.cos((v-i)*Math.PI))/2,p=Object.fromEntries(Object.keys(stand).map(k=>[k,mix(f[i][k],f[i+1][k],t)]));
  if(e.motion==='decel'&&time>.58){const brake=Math.min(1,(time-.58)/.22);const stopped={...stand,p:[226,277],s:[248,165],h:[252,125],kl:[194,338],fl:[176,393],kr:[285,327],fr:[305,393]};for(const k of Object.keys(p))p[k]=mix(p[k],stopped[k],brake)}
  if(e.motion==='depth'&&time<.2){const lift=1-time/.2;for(const k of Object.keys(p)){p[k][0]-=150*lift;p[k][1]-=55*lift}}
  const isRun=['run','sprint','flying','decel'].includes(e.motion),isJump=['split','jump','depth','trapjump','dbjump','lateral'].includes(e.motion),band=['scoop','bandface','bandexternal','face','external'].includes(e.motion);
@@ -52,16 +84,24 @@ export default function Anatomy({exercise:e}){
  <defs><marker id={`${uid}arrow`} markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#6599c8"/></marker></defs>
  <ellipse cx="253" cy="411" rx="112" ry="13" fill="#8fb5d0" opacity=".12"/><path d="M45 405H455" stroke="#b8d0e2"/><path d="M70 416H430" stroke="#d8e7f0"/>
  {isRun&&<g fontSize="12" fill="#607e96"><path d="M50 435H444" stroke="#6599c8" markerEnd={`url(#${uid}arrow)`}/><text x="50" y="457">{e.motion==='flying'?'20~30m 가속':e.motion==='decel'?'15m 최대가속':'진행 방향'}</text><text x="280" y="457">{e.motion==='decel'?'기준선 → 6~8m 감속':e.motion==='flying'?'15~30m 최고속도':''}</text>{e.motion==='decel'&&<><rect x="290" y="65" width="155" height="340" fill="#d4a767" opacity=".05"/><path d="M290 75V406" stroke="#d4a767" strokeDasharray="4 6"/></>}</g>}
- {e.motion==='split'&&<g><path d="M324 324H380V402M332 324V402" fill="none" stroke="#9cb5c6" strokeWidth="8"/><text x="333" y="430" fill="#698397" fontSize="12">뒷발 지지</text></g>}
+ {['split','heavybulgarian'].includes(e.motion)&&<g><path d="M324 324H380V402M332 324V402" fill="none" stroke="#9cb5c6" strokeWidth="8"/><text x="333" y="430" fill="#698397" fontSize="12">뒷발 지지</text></g>}
  {e.motion==='depth'&&<g><path d="M56 350H127V405H56Z" fill="#dbe8f1" stroke="#8ea9bd"/><text x="51" y="336" fill="#698397" fontSize="12">낮은 박스 ↓</text></g>}
  {e.motion==='bench'&&<path d="M135 294H330M161 294V400M310 294V400" stroke="#9cb5c6" strokeWidth="10"/>}
  {e.motion==='pullup'&&<path d="M138 95H352M151 95V403M340 95V403" stroke="#9cb5c6" strokeWidth="8"/>}
  {isJump&&<g fill="none" stroke="#6599c8"><path d={e.motion==='lateral'?'M100 210Q250 10 400 210':'M375 295Q419 175 375 80'} strokeDasharray="5 7" opacity=".55" markerEnd={`url(#${uid}arrow)`}/><path d="M151 390V335" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/><text x="61" y="366" fill="#698397" stroke="none" fontSize="12">지면 반력 ↑</text></g>}
  <g transform={`translate(${shift} 0)`}><g>
  {band&&<g><path d={`M${e.motion==='scoop'?'70 350':e.motion.includes('external')?'420 228':'420 170'} L${p.hl} M${e.motion==='scoop'?'70 350':e.motion.includes('external')?'420 228':'420 170'} L${p.hr}`} stroke="#6d8faa" strokeWidth="3"/><circle cx={e.motion==='scoop'?70:420} cy={e.motion==='scoop'?350:e.motion.includes('external')?228:170} r="7" fill="#6d8faa"/><text x={e.motion==='scoop'?43:393} y={e.motion==='scoop'?374:e.motion.includes('external')?205:147} fill="#6d8faa" fontSize="12">고정점</text><path d={e.motion==='scoop'?'M157 323L91 352':e.motion.includes('external')?'M333 244L401 229':'M332 202L401 177'} stroke="#6d8faa" markerEnd={`url(#${uid}arrow)`}/></g>}
- <MuscleFigure points={p} exercise={e}/>
- {['press','squat','bench'].includes(e.motion)&&<g><path d={`M${p.hl[0]-37} ${p.hl[1]}H${p.hr[0]+37}`} stroke="#7e9bb0" strokeWidth="5"/>{[p.hl[0]-32,p.hr[0]+32].map((x,j)=><rect key={j} x={x-6} y={p.hl[1]-22} width="12" height="44" rx="3" fill="#a8bfce" stroke="#7897ad"/>)}</g>}
- {['deadlift','trapjump','dbjump','rdl'].includes(e.motion)&&<g>{['hl','hr'].map(k=><g key={k}><path d={`M${p[k][0]-18} ${p[k][1]}h36`} stroke="#7897ad" strokeWidth="5"/><rect x={p[k][0]-22} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/><rect x={p[k][0]+12} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/></g>)}{['deadlift','trapjump'].includes(e.motion)&&<path d={`M${p.hl}l10 17H${p.hr[0]-10}L${p.hr}`} fill="none" stroke="#7897ad" strokeWidth="4"/>}</g>}
+ <MuscleFigure points={p} exercise={e} handTurn={e.motion==='hammer'?Math.sin(time*Math.PI*2)*75:0} handBack={e.motion==='wristrock'&&time>=.25&&time<.5}/>
+
+ {e.motion==='ankle'&&<g fill="none" stroke="#6599c8"><path d="M154 295H112" markerEnd={`url(#${uid}arrow)`}/><path d="M202 403h24" strokeWidth="3"/><text x="91" y="281" fill="#607e96" stroke="none" fontSize="12">무릎 전진 · 뒤꿈치 고정</text></g>}
+ {e.motion==='reach3'&&<g stroke="#6599c8" fill="none"><path d="M282 403L357 403M282 403L166 379M282 403L357 377" strokeDasharray="4 5"/><text x="315" y="433" fill="#607e96" stroke="none" fontSize="12">{['앞','뒤대각선 안쪽','뒤대각선 바깥쪽'][Math.min(2,Math.floor(time*3))]}</text><circle cx="218" cy="403" r="10"/></g>}
+ {['wristrock','wristpress'].includes(e.motion)&&<g><path d="M175 396h24M211 396h24" stroke="#e34c54" strokeWidth="4"/><text x="87" y="434" fill="#607e96" fontSize="12">{e.motion==='wristpress'?'손바닥·손가락 유지 · 점진적 부하':['손바닥 · 신전','손등 · 굴곡 (가볍게)','요측 편위','척측 편위'][Math.min(3,Math.floor(time*4))]}</text>{e.motion==='wristrock'&&time>=.25&&time<.5&&<path d="M177 389q10-9 18 0M211 389q10-9 18 0" fill="none" stroke="#e34c54" strokeWidth="3"/>}</g>}
+ {e.motion==='hammer'&&<g><g transform={`translate(${p.hl}) rotate(${Math.sin(time*Math.PI*2)*75})`}><path d="M0 12V-54" stroke="#7897ad" strokeWidth="5"/><rect x="-17" y="-62" width="34" height="15" rx="3" fill="#9fb6c8"/><ellipse cx="0" cy="0" rx="9" ry="5" fill="#e34c54"/></g><text x="80" y="292" fill="#607e96" fontSize="12">{time<.5?'회외 · 손바닥 위':'회내 · 손바닥 아래'} · 팔꿈치 고정</text></g>}
+ {e.motion==='thoracic'&&<path d="M285 285Q326 239 287 207" fill="none" stroke="#6599c8" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/>}
+ {e.motion==='proney'&&<path d="M195 341V305" fill="none" stroke="#6599c8" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/>}
+
+ {['press','strictpress','squat','bench'].includes(e.motion)&&<g><path d={`M${p.hl[0]-37} ${p.hl[1]}H${p.hr[0]+37}`} stroke="#7e9bb0" strokeWidth="5"/>{[p.hl[0]-32,p.hr[0]+32].map((x,j)=><rect key={j} x={x-6} y={p.hl[1]-22} width="12" height="44" rx="3" fill="#a8bfce" stroke="#7897ad"/>)}</g>}
+ {['deadlift','trapjump','dbjump','rdl','heavybulgarian'].includes(e.motion)&&<g>{['hl','hr'].map(k=><g key={k}><path d={`M${p[k][0]-18} ${p[k][1]}h36`} stroke="#7897ad" strokeWidth="5"/><rect x={p[k][0]-22} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/><rect x={p[k][0]+12} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/></g>)}{['deadlift','trapjump'].includes(e.motion)&&<path d={`M${p.hl}l10 17H${p.hr[0]-10}L${p.hr}`} fill="none" stroke="#7897ad" strokeWidth="4"/>}</g>}
  {['rotation','chest'].includes(e.motion)&&<circle cx={(p.hl[0]+p.hr[0])/2+(i===2?t*65:0)} cy={(p.hl[1]+p.hr[1])/2} r="16" fill="#9fb6c8" stroke="#6599c8" strokeWidth="2"/>}
  {e.motion==='rollout'&&<circle cx={p.hl[0]} cy={p.hl[1]+10} r="18" fill="#9fb6c8" stroke="#6599c8" strokeWidth="4"/>}
  {e.motion==='nordic'&&<path d="M323 372V402M318 380H355" stroke="#9fb6c8" strokeWidth="9"/>}
@@ -71,6 +111,6 @@ export default function Anatomy({exercise:e}){
 
  </div>
  <div className="animation-controls"><button className="pause-button" aria-pressed={!speed} onClick={()=>setSpeed(speed?0:1)}>{speed?'Ⅱ 일시정지':'▷ 재생'}</button></div>
- <div className="muscle-key"><p><span className="primary-dot"/>주동근 <span>{e.primary.join(' · ')}</span></p><p><span className="secondary-dot"/>보조근 <span>{e.secondary.filter(x=>!e.primary.includes(x)).join(' · ')||'자세 안정근'}</span></p></div>
+ <div className="muscle-key"><p><span className="primary-dot"/>주동근 <span>{e.highlightForearms?'손목·전완':e.primary.join(' · ')}</span></p><p><span className="secondary-dot"/>보조근 <span>{e.secondary.filter(x=>!e.primary.includes(x)).join(' · ')||'자세 안정근'}</span></p></div>
  </section>
 }
