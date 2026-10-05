@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import{createRoot}from'react-dom/client';
 import{days,displayTag,strengthBlock,conditioningPlan,regionMuscles,trainingGroups,matchesTrainingGroup,principles,exercises,powerWarning,progressionType}from'./data';
 import Anatomy from './Anatomy';
+import ProgramMatrix from './ProgramMatrix.jsx';
 import './styles.css';
 const isPower=e=>e.tags.some(t=>t.includes('파워'));
 function Badge({tag}){return <span className={`badge ${tag.includes('파워')?'power':tag==='최대근력'?'strength':tag.includes('감속')||tag.includes('편심')?'brake':'other'}`}>{displayTag(tag)}</span>}
@@ -38,12 +39,12 @@ function App(){
  const alternatives=e?exercises.filter(x=>x.parent===e.id):[];
  const parent=e?.parent&&exercises.find(x=>x.id===e.parent);
  return <>
-  <header className="app-header"><a className="brand" href="./">kinetic<span>.</span></a><nav className="view-tabs" aria-label="보기 방식">{['데이별','부위별','훈련능력별'].map(m=><button key={m} onClick={()=>view(m)} className={mode===m?'active':''} aria-pressed={mode===m}>{m}</button>)}</nav><span className="header-note">나의 운동 가이드</span></header>
+  <header className="app-header"><a className="brand" href="./">kinetic<span>.</span></a><nav className="view-tabs" aria-label="보기 방식">{['데이별','부위별','훈련능력별','구성표'].map(m=><button key={m} onClick={()=>view(m)} className={mode===m?'active':''} aria-pressed={mode===m}>{m==='훈련능력별'?'훈련별':m}</button>)}</nav><span className="header-note">나의 운동 가이드</span></header>
   {mode==='데이별'&&<nav className="day-tabs" aria-label="트레이닝 데이">{days.map((d,i)=><button key={d} aria-pressed={day===i} className={day===i?'active':''} onClick={()=>apply('day',i)}><span>0{i+1}</span>{d.replace(' 데이','')}</button>)}</nav>}
 
   {mode==='부위별'&&<nav className="classification-bar region-tabs" aria-label="부위 분류">{Object.entries(regionMuscles).map(([r,items])=><div key={r} className={'region-category '+(region===r?'expanded':'')}><button className={'region-tab '+(region===r?'active':'')} aria-expanded={region===r} aria-controls={'muscles-'+r} onClick={()=>apply('region',region===r?'':r)}>{r}</button>{region===r&&<div id={'muscles-'+r} className="muscle-subcategories" aria-label={r+' 세부 근육'}>{items.map(m=><button key={m} className={muscle===m?'active':''} aria-pressed={muscle===m} onClick={()=>apply('muscle',muscle===m?'':m)}>{m==='코어'?'복부·코어':m}</button>)}</div>}</div>)}</nav>}
   {mode==='훈련능력별'&&<nav className="classification-bar ability-tabs" aria-label="훈련능력 분류">{Object.keys(trainingGroups).map(a=><button key={a} aria-pressed={ability===a} className={ability===a?'active':''} onClick={()=>apply('ability',ability===a?'':a)}>{a}</button>)}</nav>}
-  <main className="dashboard">
+  {mode==='구성표'?<ProgramMatrix/>:<main className="dashboard">
    <aside className="sidebar" id="exercise-browser">
     <div className="list-heading"><h2>운동</h2><button className="text-button" onClick={reset}>전체보기</button></div>
     <div className="exercise-list" aria-label="운동 목록">{visible.map(x=><button key={x.id} className={'exercise-item '+(e?.id===x.id?'active ':'')+(x.parent?'is-alternative':'')} onClick={()=>choose(x.id)} aria-pressed={e?.id===x.id} aria-label={x.parent?x.name+(x.relation==='advanced'?' (고급 선택)':' (대체운동)'):x.name}>{x.parent&&<span className="alternative-branch" aria-hidden="true">↳</span>}{x.name}</button>)}</div>
@@ -51,7 +52,7 @@ function App(){
    </aside>
    {e?<><div className="center"><a className="mobile-exercise-jump" href="#exercise-browser">운동 선택 ↓</a><Anatomy key={e.id} exercise={e}/></div>
     <aside className="detail"><h2 className="notes-heading">운동 노트</h2>{parent&&<button className="parent-link" onClick={()=>showRelated(parent.id)}>← {parent.name}</button>}{e.day===5&&<section className="purpose" aria-label="컨디셔닝 주간 구성"><h3>근지구력 · A/B주 교대</h3>{conditioningPlan.weeks.map(w=><p key={w.name}><b>{w.name}</b> {w.text}</p>)}<p>{conditioningPlan.note}</p></section>}<Details e={e} select={showRelated}/>{alternatives.map(a=><Details key={a.id} e={a} select={showRelated} nested/>)}</aside></>:<div className="no-results"><p>다른 부위나 근육을 선택해 보세요.</p></div>}
-  </main>
+  </main>}
   <footer>동작 이해를 위한 2차원 가이드</footer>
  </>;
 }
