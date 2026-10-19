@@ -15,7 +15,7 @@ export const exerciseMedia = {
     ]
   },
   "reach3": {
-    "note": "서 있는 한발 균형 원본의 다리 부분을 편집한 8방향 참고 모션입니다. 지지발은 유지하고 반대발은 바닥 가까이 뻗었다 돌아옵니다. 실제 훈련에서는 작은 물체를 발로 가져오거나 목표점을 가볍게 터치합니다.",
+    "note": "사선·후방 시점의 8방향 참고 동작입니다. 지지발과 상체를 유지하고 반대발을 앞·뒤·옆·대각선의 바닥 가까이 뻗었다 돌아옵니다. 실제 훈련에서는 작은 물체를 가져오거나 목표점을 터치합니다. 다리 움직임은 부분 편집되었습니다.",
     "variants": [
       {
         "label": "8방향 균형",
@@ -23,8 +23,8 @@ export const exerciseMedia = {
         "poster": "media/exercises/reach-eight-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
-        "originalVideo": "https://apilyfta.com/static/GymvisualMP4/59751201-Single-Leg-Balance-Cross-Punch-(male)_Plyometrics_.mp4",
-        "sourceExercise": "Standing single-leg balance · eight-direction leg edit"
+        "originalVideo": "https://apilyfta.com/static/GymvisualMP4/67501201-Standing-Balance-Hip-Rotation-(female)_Hips_.mp4",
+        "sourceExercise": "Standing Balance Hip Rotation · oblique-view reach edit"
       }
     ]
   },
@@ -81,7 +81,7 @@ export const exerciseMedia = {
     ]
   },
   "wristrock": {
-    "note": "원본 손·전완 이미지를 부분 편집했습니다. 안쪽 약 2초 → 정방향 약 2초 → 바깥쪽 약 2초 순서입니다. 자세를 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 손을 다시 놓습니다.",
+    "note": "안쪽 → 정방향 → 바깥쪽으로 약 2초씩 놓습니다. 방향을 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 다시 놓습니다. 손목 움직임을 보여주도록 부분 편집한 참고 영상입니다.",
     "variants": [
       {
         "label": "손목 제어 참고",
@@ -451,7 +451,7 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "참고 영상의 손바닥 동작에 맞춰 부분 편집했습니다. 손가락을 고정하고 손바닥 뒤꿈치를 들어 올렸다 내립니다. 팔꿈치를 펴는 힘보다 손바닥으로 바닥을 미는 동작을 봅니다.",
+    "note": "손가락은 바닥을 계속 지지하고 손바닥 뒤꿈치만 들어 올렸다 내립니다. 손목과 손바닥의 움직임을 보여주도록 부분 편집한 참고 영상입니다.",
     "variants": [
       {
         "label": "손목 부하 참고",
@@ -518,7 +518,7 @@ export const exerciseMedia = {
     ]
   },
   "thoracic": {
-    "note": "기존 3D 영상의 상완·전완을 분리해 연결한 부분 편집입니다. 손을 뒷목에 둔 짧은 회전 범위를 보여줍니다. 골반과 허리를 고정하고 가슴과 팔꿈치를 함께 회전합니다.",
+    "note": "시작 자세 → 흉추 회전 → 복귀의 전체 동작입니다. 열린 자세에서 팔꿈치를 접어 손을 뒷목으로 가져옵니다. 골반과 허리를 고정하고 가슴과 팔꿈치를 함께 회전합니다. 팔 동작을 부분 편집한 참고 영상입니다.",
     "variants": [
       {
         "label": "기본 동작",
@@ -527,7 +527,13 @@ export const exerciseMedia = {
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/kneeling-back-rotation-stretch--93s",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/18121201-Kneeling-Back-Rotation-Stretch_Back.mp4",
-        "sourceExercise": "Kneeling Back Rotation Stretch"
+        "sourceExercise": "Kneeling Back Rotation Stretch",
+        "motionEditSource": {
+          "provider": "SmartWorkout",
+          "source": "https://smartworkout.app/en/exercise-library/abs/side-crunch",
+          "originalVideo": "https://api.smartworkout.app/asset/video/4ede9603-15f3-4af1-82e4-51c799dce69e.mp4",
+          "part": "forearm and hand"
+        }
       }
     ]
   },
