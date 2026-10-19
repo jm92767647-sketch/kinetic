@@ -1,5 +1,6 @@
 import React,{useEffect,useState,useId} from 'react';
 import MuscleFigure from './MuscleFigure';
+import {correctedFrames,correctedNotes,proneFrames,reachDirections as preciseDirections,reachTargets as preciseTargets} from './correctedMotions.js';
 // 각 pose: 머리, 어깨, 골반, 왼/오 팔꿈치·손, 왼/오 무릎·발목.
 const pose=(h,s,p,el,hl,er,hr,kl,fl,kr,fr)=>({h,s,p,el,hl,er,hr,kl,fl,kr,fr});
 const stand=pose([245,108],[245,148],[245,258],[208,200],[203,247],[280,200],[287,247],[224,326],[218,393],[271,326],[282,393]);
@@ -98,11 +99,12 @@ const addedFrames={
 
 function frames(m){if(addedFrames[m])return addedFrames[m];switch(m){case'split':return [split0,split1,split2,split1,split0];case'rdl':return[stand,rdl,rdl,stand,stand];case'nordic':return[kneel,nordic,nordic,kneel,kneel];case'reverse':return[kneel,reverse,reverse,kneel,kneel];case'pushup':return[push0,push1,{...push0,hl:[180,366],hr:[217,366]},push0,push0];case'pike':return[pike0,pike1,pike0,pike0,pike0];case'rollout':return[kneel,rollout,rollout,kneel,kneel];case'pullup':return[hang,hang,pulled,pulled,hang];case'bench':return[bench0,bench1,bench1,bench0,bench0];case'press':return[rack,{...rack,h:[245,128],s:[245,168],p:[237,278],kl:[211,331],kr:[278,331],el:[206,204],hl:[219,163],er:[285,204],hr:[270,163]},overhead,overhead,rack];case'rotation':case'scoop':return[rotation0,rotation0,rotation1,rotation1,rotation0];case'chest':return[rack,rack,reach,reach,rack];case'face':case'bandface':return[faces0,faces0,faces1,faces1,faces0];case'external':case'bandexternal':return[external0,external0,external1,external1,external0];case'pistol':return[pistol0,pistol1,pistol1,pistol0,pistol0];case'boxing':return[rack,{...reach,hr:[260,148]},rack,{...reach,hl:[250,144]},rack];case'run':case'sprint':case'flying':case'decel':return[runA,runB,runA,runB,runA];case'lateral':return[split0,split1,{...jump,p:[280,210]},split1,split0];case'depth':return[stand,squat,jump,squat,stand];case'deadlift':return[stand,{...squat,hl:[218,350],hr:[291,350]},stand,stand,stand];case'squat':return[rack,squat,squat,rack,rack];case'trapjump':case'dbjump':return[stand,{...squat,hl:[205,342],hr:[315,342]},{...jump,el:[207,155],hl:[206,204],er:[283,155],hr:[284,204]},squat,stand];default:return[stand,squat,jump,squat,stand];}}
 const mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
-export default function Anatomy({exercise:e}){
- const [speed,setSpeed]=useState(()=>matchMedia("(prefers-reduced-motion: reduce)").matches?0:1),[time,setTime]=useState(0);const uid=useId().replaceAll(':','');
+export default function Anatomy({exercise:e,corrected=false}){
+ const [proneStage,setProneStage]=useState('W');
+ const [speed,setSpeed]=useState(()=>typeof matchMedia==='function'&&matchMedia("(prefers-reduced-motion: reduce)").matches?0:1),[time,setTime]=useState(0);const uid=useId().replaceAll(':','');
  useEffect(()=>{setTime(0)},[e.id]);
  useEffect(()=>{let handle,last;const tick=now=>{if(last&&speed){const delta=Math.max(0,Math.min(now-last,80))*speed/(e.motion==='reach8'?20000:e.motion==='pronewty'?12000:4800);setTime(t=>(t+delta)%1)}last=now;handle=requestAnimationFrame(tick)};handle=requestAnimationFrame(tick);return()=>cancelAnimationFrame(handle)},[speed,e.motion]);
- const f=frames(e.motion),phase=motionPhases[e.motion],v=((time%1+1)%1)*(f.length-1),i=phase?Math.min(f.length-2,phase.findLastIndex(x=>time>=x)):Math.min(f.length-2,Math.floor(v)),fraction=phase?(time-phase[i])/(phase[i+1]-phase[i]):v-i,t=(1-Math.cos(fraction*Math.PI))/2,p=Object.fromEntries(Object.keys(stand).map(k=>[k,mix(f[i][k],f[i+1][k],t)]));
+ const f=corrected?(e.motion==='pronewty'?proneFrames(proneStage):correctedFrames[e.motion]||frames(e.motion)):frames(e.motion),phase=motionPhases[e.motion],v=((time%1+1)%1)*(f.length-1),i=phase?Math.min(f.length-2,phase.findLastIndex(x=>time>=x)):Math.min(f.length-2,Math.floor(v)),fraction=phase?(time-phase[i])/(phase[i+1]-phase[i]):v-i,t=(1-Math.cos(fraction*Math.PI))/2,p=Object.fromEntries(Object.keys(stand).map(k=>[k,mix(f[i][k],f[i+1][k],t)]));
  if(e.motion==='decel'&&time>.58){const brake=Math.min(1,(time-.58)/.22);const stopped={...stand,p:[226,277],s:[248,165],h:[252,125],kl:[194,338],fl:[176,393],kr:[285,327],fr:[305,393]};for(const k of Object.keys(p))p[k]=mix(p[k],stopped[k],brake)}
  if(e.motion==='depth'&&time<.2){const lift=1-time/.2;for(const k of Object.keys(p)){p[k][0]-=150*lift;p[k][1]-=55*lift}}
  const isRun=['run','sprint','flying','decel'].includes(e.motion),isJump=['split','jump','depth','trapjump','dbjump','lateral'].includes(e.motion),band=['scoop','bandface','bandexternal','face','external'].includes(e.motion);
@@ -121,11 +123,20 @@ export default function Anatomy({exercise:e}){
  {band&&<g><path d={`M${e.motion==='scoop'?'70 350':e.motion.includes('external')?'420 228':'420 170'} L${p.hl} M${e.motion==='scoop'?'70 350':e.motion.includes('external')?'420 228':'420 170'} L${p.hr}`} stroke="#6d8faa" strokeWidth="3"/><circle cx={e.motion==='scoop'?70:420} cy={e.motion==='scoop'?350:e.motion.includes('external')?228:170} r="7" fill="#6d8faa"/><text x={e.motion==='scoop'?43:393} y={e.motion==='scoop'?374:e.motion.includes('external')?205:147} fill="#6d8faa" fontSize="12">고정점</text><path d={e.motion==='scoop'?'M157 323L91 352':e.motion.includes('external')?'M333 244L401 229':'M332 202L401 177'} stroke="#6d8faa" markerEnd={`url(#${uid}arrow)`}/></g>}
  {['explosiverow','heavyrow','seatedcalf'].includes(e.motion)&&<path d={e.motion==='seatedcalf'?'M173 331H249M183 331V403M240 331V403':'M127 337H180M135 337V403M172 337V403'} stroke="#9cb5c6" strokeWidth="8"/>}
  {e.motion==='explosivepull'&&<path d="M362 226V139" fill="none" stroke="#6599c8" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/>}
- <MuscleFigure points={p} exercise={e} handTurn={e.motion==='hammer'?Math.sin(time*Math.PI*2)*75:0} handBack={e.motion==='wristrock'&&time>=.25&&time<.5}/>
+ <MuscleFigure points={p} exercise={corrected?{...e,explicitElbows:true}:e} hideHands={corrected&&['wristrock','wristpress'].includes(e.motion)} handTurn={e.motion==='hammer'?Math.sin(time*Math.PI*2)*75:0} handBack={!corrected&&e.motion==='wristrock'&&time>=.25&&time<.5}/>
+ {corrected&&['wristrock','wristpress'].includes(e.motion)&&<g fill="#80b3e7" stroke="#4d83b5" strokeWidth="1.2">{['hl','hr'].map(k=>{
+   const [x,y]=p[k],angle=e.motion==='wristrock'?[0,65,-65,180][Math.min(3,Math.floor(time*4))]*(k==='hl'?-1:1):0;
+   const radians=angle*Math.PI/180,handTransform=e.motion==='wristrock'?`matrix(${Math.cos(radians)} ${Math.sin(radians)*.3} ${-Math.sin(radians)} ${Math.cos(radians)*.3} ${x} 397)`:`translate(${x} 0)`;
+   return <g key={k}>
+   {e.motion==='wristrock'&&<path d={`M${x-5} ${y-3}L${x+5} ${y-3}L${x+5} 398L${x-5} 398Z`}/>}
+   <g transform={handTransform}>
+    {e.motion==='wristrock'?<><path d="M-6-7Q-8 1-5 8L-4 22Q-3 25-2 22L-1 10L0 26Q2 28 3 25L4 10L5 24Q7 26 8 23L8 9L10 19Q12 21 12 18L11 5L5-6Z"/><path d="M-4 7H8" fill="none"/></>:<><path d={`M-5 ${y-3}L5 ${y-3}L21 391L18 397L-4 ${y+5}Z`}/>{[0,1,2,3].map(j=><path key={j} d={`M${15+j*2} 392l${8+j} 1v3h-${8+j}Z`}/>)}<circle cx="21" cy="396" r="2" fill="#e34c54"/></>}
+   </g></g>;
+ })}</g>}
 
  {e.motion==='ankle'&&<g fill="none" stroke="#6599c8"><path d="M154 295H112" markerEnd={`url(#${uid}arrow)`}/><path d="M202 403h24" strokeWidth="3"/><text x="91" y="281" fill="#607e96" stroke="none" fontSize="12">무릎 전진 · 뒤꿈치 고정</text></g>}
- {e.motion==='reach8'&&<g stroke="#6599c8" fill="none">{reachTargets.map((q,j)=><path key={j} d={`M218 393L${q}`} strokeDasharray="4 5" opacity={Math.floor(time*8)===j?1:.3} markerEnd={`url(#${uid}arrow)`}/>)}<text x="145" y="455" fill="#607e96" stroke="none" fontSize="12">{reachDirections[Math.min(7,Math.floor(time*8))]} · 지지발 고정</text><circle cx="218" cy="403" r="10"/></g>}
- {['wristrock','wristpress'].includes(e.motion)&&<g><path d="M175 396h24M211 396h24" stroke="#e34c54" strokeWidth="4"/><text x="87" y="434" fill="#607e96" fontSize="12">{e.motion==='wristpress'?'손바닥·손가락 유지 · 점진적 부하':['손바닥 · 신전','손등 · 굴곡 (가볍게)','요측 편위','척측 편위'][Math.min(3,Math.floor(time*4))]}</text>{e.motion==='wristrock'&&time>=.25&&time<.5&&<path d="M177 389q10-9 18 0M211 389q10-9 18 0" fill="none" stroke="#e34c54" strokeWidth="3"/>}</g>}
+ {e.motion==='reach8'&&<g stroke="#6599c8" fill="none">{(corrected?preciseTargets:reachTargets).map((q,j)=><path key={j} d={`M218 393L${q}`} strokeDasharray="4 5" opacity={Math.floor(time*8)===j?1:.3} markerEnd={`url(#${uid}arrow)`}/>)}<text x="145" y="455" fill="#607e96" stroke="none" fontSize="12">{(corrected?preciseDirections:reachDirections)[Math.min(7,Math.floor(time*8))]} · 지지발 고정</text><circle cx="218" cy="403" r="10"/></g>}
+ {['wristrock','wristpress'].includes(e.motion)&&<g><path d="M175 400h24M211 400h24" stroke="#e34c54" strokeWidth="3"/><text x="87" y="441" fill="#607e96" fontSize="12">{corrected?(e.motion==='wristpress'?'손가락 지지 유지 · 손바닥 밑부분만 상승':['손가락 앞쪽','손가락 안쪽','손가락 바깥쪽','손가락 몸쪽'][Math.min(3,Math.floor(time*4))]):(e.motion==='wristpress'?'손바닥·손가락 유지 · 점진적 부하':['손바닥 · 신전','손등 · 굴곡 (가볍게)','요측 편위','척측 편위'][Math.min(3,Math.floor(time*4))])}</text>{!corrected&&e.motion==='wristrock'&&time>=.25&&time<.5&&<path d="M177 389q10-9 18 0M211 389q10-9 18 0" fill="none" stroke="#e34c54" strokeWidth="3"/>}</g>}
  {e.motion==='hammer'&&<g><g transform={`translate(${p.hl}) rotate(${Math.sin(time*Math.PI*2)*75})`}><path d="M0 12V-54" stroke="#7897ad" strokeWidth="5"/><rect x="-17" y="-62" width="34" height="15" rx="3" fill="#9fb6c8"/><ellipse cx="0" cy="0" rx="9" ry="5" fill="#e34c54"/></g><text x="80" y="292" fill="#607e96" fontSize="12">{time<.5?'회외 · 손바닥 위':'회내 · 손바닥 아래'} · 팔꿈치 고정</text></g>}
  {e.motion==='thoracic'&&<path d="M285 285Q326 239 287 207" fill="none" stroke="#6599c8" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/>}
  {['proney','pronewty'].includes(e.motion)&&<path d="M195 341V305" fill="none" stroke="#6599c8" strokeWidth="2" markerEnd={`url(#${uid}arrow)`}/>}
@@ -134,7 +145,7 @@ export default function Anatomy({exercise:e}){
  {['deadlift','trapjump','dbjump','rdl','heavybulgarian','explosiverow','heavyrow','swing','calf'].includes(e.motion)&&<g>{(['explosiverow','heavyrow'].includes(e.motion)?['hr']:['swing','calf'].includes(e.motion)?['hl']:['hl','hr']).map(k=><g key={k}><path d={`M${p[k][0]-18} ${p[k][1]}h36`} stroke="#7897ad" strokeWidth="5"/><rect x={p[k][0]-22} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/><rect x={p[k][0]+12} y={p[k][1]-14} width="10" height="28" rx="3" fill="#9fb6c8"/></g>)}{['deadlift','trapjump'].includes(e.motion)&&<path d={`M${p.hl}l10 17H${p.hr[0]-10}L${p.hr}`} fill="none" stroke="#7897ad" strokeWidth="4"/>}</g>}
  {e.motion==='seatedcalf'&&<g><rect x="276" y="307" width="25" height="15" rx="3" fill="#9fb6c8"/><path d="M298 365V337" stroke="#6599c8" markerEnd={`url(#${uid}arrow)`}/></g>}
  {e.motion==='calf'&&<g><path d="M219 375V343" fill="none" stroke="#6599c8" markerEnd={`url(#${uid}arrow)`}/><path d="M218 408h25" stroke="#9cb5c6" strokeWidth="7"/></g>}
- {e.motion==='pronewty'&&<text x="105" y="440" fill="#607e96" fontSize="12">{time<1/3?'W · 시작 단계':time<2/3?'T · 레버 증가':'Y · 고급 단계'} (능력에 맞는 한 단계 선택)</text>}
+ {e.motion==='pronewty'&&<text x="90" y="440" fill="#607e96" fontSize="12">{corrected?`${proneStage} · ${i===0?'복부 고정 → 가슴 살짝 들기':i<4?'상체 높이 유지 → 팔 들기':'팔 내리기 → 상체 복귀'}`:time<1/3?'W · 시작 단계':time<2/3?'T · 레버 증가':'Y · 고급 단계'}</text>}
  {['explosiverow','heavyrow'].includes(e.motion)&&<path d="M341 350V284" fill="none" stroke="#6599c8" markerEnd={`url(#${uid}arrow)`}/>}
  {e.motion==='swing'&&<path d="M327 310Q353 210 308 167" fill="none" stroke="#6599c8" markerEnd={`url(#${uid}arrow)`}/>}
  {['rotation','chest'].includes(e.motion)&&<circle cx={(p.hl[0]+p.hr[0])/2+(i===2?t*65:0)} cy={(p.hl[1]+p.hr[1])/2} r="16" fill="#9fb6c8" stroke="#6599c8" strokeWidth="2"/>}
@@ -146,6 +157,8 @@ export default function Anatomy({exercise:e}){
 
  </div>
  <div className="animation-controls"><button className="pause-button" aria-pressed={!speed} onClick={()=>setSpeed(speed?0:1)}>{speed?'Ⅱ 일시정지':'▷ 재생'}</button></div>
+ {corrected&&e.motion==='pronewty'&&<div className="media-variants" role="group" aria-label="동작 단계 선택">{['W','T','Y'].map(stage=><button key={stage} className={proneStage===stage?'active':''} aria-pressed={proneStage===stage} onClick={()=>{setProneStage(stage);setTime(0)}}>{stage}</button>)}</div>}
  <div className="muscle-key"><p><span className="primary-dot"/>주동근 <span>{e.highlightForearms?'손목·전완':e.primary.join(' · ')}</span></p><p><span className="secondary-dot"/>보조근 <span>{e.secondary.filter(x=>!e.primary.includes(x)).join(' · ')||'자세 안정근'}</span></p></div>
+ {corrected&&<p className="media-reference-note">{correctedNotes[e.id]}</p>}
  </section>
 }

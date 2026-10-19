@@ -1,6 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import Anatomy from './Anatomy';
 import {exerciseMedia} from './exerciseMedia.js';
+import {correctedExerciseIds} from './correctedMotions.js';
 
 const assetUrl=path=>`${import.meta.env.BASE_URL}${path}`;
 
@@ -19,6 +20,7 @@ export default function ExerciseMedia({exercise:e}){
   else video.play().catch(()=>setPaused(true));
  },[variant?.src,paused,failed]);
 
+ if(correctedExerciseIds.includes(e.id))return <Anatomy exercise={e} corrected/>;
  if(!variant||failed)return <>
   {failed&&<p className="media-fallback" role="status">영상을 불러오지 못해 기존 동작 가이드를 표시합니다. <button onClick={()=>setFailed(false)}>다시 시도</button></p>}
   <Anatomy exercise={e}/>

@@ -1,4 +1,4 @@
-// Verified motion clips from SmartWorkout and Lyfta. Routine data remains in data.js.
+// Verified source clips; local WebM variants have transparent backgrounds.
 export const exerciseMedia = {
   "ankle": {
     "note": "참고 영상은 벽 종아리 스트레치입니다. 원운동은 앞발 뒤꿈치를 붙이고 앞무릎을 전진합니다.",
@@ -32,8 +32,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-03-video.mp4",
-        "poster": "media/exercises/smart-new-03-video.webp",
+        "src": "media/exercises/smart-new-03-video.webm",
+        "poster": "media/exercises/smart-new-03-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/bulgarian-jump-squat",
         "originalVideo": "https://api.smartworkout.app/asset/video/f7eb1a15-61f3-4fe6-8ef4-4e5dbf57c3f6.mp4",
@@ -45,8 +45,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-004-video.mp4",
-        "poster": "media/exercises/lyfta-004-video.webp",
+        "src": "media/exercises/lyfta-004-video.webm",
+        "poster": "media/exercises/lyfta-004-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/dumbbell-bulgarian-split-squat--7v6",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/22901201-Dumbbell-Bulgarian-Split-Squat-(female)_Thighs.mp4",
@@ -58,8 +58,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-006-video.mp4",
-        "poster": "media/exercises/lyfta-006-video.webp",
+        "src": "media/exercises/lyfta-006-video.webm",
+        "poster": "media/exercises/lyfta-006-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/front-squat-m",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/00421201-Barbell-Front-Squat_Hips.mp4",
@@ -71,8 +71,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-008-video.mp4",
-        "poster": "media/exercises/smart-008-video.webp",
+        "src": "media/exercises/smart-008-video.webm",
+        "poster": "media/exercises/smart-008-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/reverse-nordic-curl",
         "originalVideo": "https://api.smartworkout.app/asset/video/9c940613-f1ee-435e-8f81-b8895854ef48.mp4",
@@ -99,8 +99,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-014-video.mp4",
-        "poster": "media/exercises/lyfta-014-video.webp",
+        "src": "media/exercises/lyfta-014-video.webm",
+        "poster": "media/exercises/lyfta-014-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/band-twist-6z3",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/09311201-Band-twist-(down-up)-(female)_Waist.mp4",
@@ -112,8 +112,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-09-video.mp4",
-        "poster": "media/exercises/smart-new-09-video.webp",
+        "src": "media/exercises/smart-new-09-video.webm",
+        "poster": "media/exercises/smart-new-09-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/abs/medicine-ball-rotational-throw",
         "originalVideo": "https://api.smartworkout.app/asset/video/052ac27f-52c1-4e92-a3d7-b0ae28fe3bbe.mp4",
@@ -125,8 +125,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-019-video.mp4",
-        "poster": "media/exercises/lyfta-019-video.webp",
+        "src": "media/exercises/lyfta-019-video.webm",
+        "poster": "media/exercises/lyfta-019-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/push-press-75w",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/12001201-Push-Press_Shoulders.mp4",
@@ -139,8 +139,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-023-video.mp4",
-        "poster": "media/exercises/lyfta-023-video.webp",
+        "src": "media/exercises/lyfta-023-video.webm",
+        "poster": "media/exercises/lyfta-023-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/pull-up-1i",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/06521201-Pull-up_Back-FIX_.mp4",
@@ -152,8 +152,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-025-video.mp4",
-        "poster": "media/exercises/lyfta-025-video.webp",
+        "src": "media/exercises/lyfta-025-video.webm",
+        "poster": "media/exercises/lyfta-025-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/barbell-standing-military-press--756",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/11651201-Barbell-Standing-Military-Press-(without-rack)_Shoulders_without-weight.mp4",
@@ -165,8 +165,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-029-video.mp4",
-        "poster": "media/exercises/lyfta-029-video.webp",
+        "src": "media/exercises/lyfta-029-video.webm",
+        "poster": "media/exercises/lyfta-029-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/pike-push-up--8p0",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/29211201-Pike-Push-up_Chest.mp4",
@@ -178,8 +178,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "맨몸",
-        "src": "media/exercises/lyfta-023-video.mp4",
-        "poster": "media/exercises/lyfta-023-video.webp",
+        "src": "media/exercises/lyfta-023-video.webm",
+        "poster": "media/exercises/lyfta-023-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/pull-up-1i",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/06521201-Pull-up_Back-FIX_.mp4",
@@ -187,8 +187,8 @@ export const exerciseMedia = {
       },
       {
         "label": "가중",
-        "src": "media/exercises/lyfta-031-video.mp4",
-        "poster": "media/exercises/lyfta-031-video.webp",
+        "src": "media/exercises/lyfta-031-video.webm",
+        "poster": "media/exercises/lyfta-031-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/weighted-pull-up-6wt",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/08411201-Weighted-Pull-Up_Back_.mp4",
@@ -200,8 +200,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-033-video.mp4",
-        "poster": "media/exercises/lyfta-033-video.webp",
+        "src": "media/exercises/lyfta-033-video.webm",
+        "poster": "media/exercises/lyfta-033-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/band-face-pull-6y2",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/08961201-Band-face-pull_Shoulders.mp4",
@@ -214,8 +214,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "회내",
-        "src": "media/exercises/lyfta-037-video.mp4",
-        "poster": "media/exercises/lyfta-037-video.webp",
+        "src": "media/exercises/lyfta-037-video.webm",
+        "poster": "media/exercises/lyfta-037-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/forearm---pronation---articulations-882",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/27651201-Forearm---Pronation.mp4",
@@ -223,8 +223,8 @@ export const exerciseMedia = {
       },
       {
         "label": "회외",
-        "src": "media/exercises/lyfta-039-video.mp4",
-        "poster": "media/exercises/lyfta-039-video.webp",
+        "src": "media/exercises/lyfta-039-video.webm",
+        "poster": "media/exercises/lyfta-039-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/forearm---supination---articulations-883",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/27661201-Forearm---Supination.mp4",
@@ -237,8 +237,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-05-video.mp4",
-        "poster": "media/exercises/smart-new-05-video.webp",
+        "src": "media/exercises/smart-new-05-video.webm",
+        "poster": "media/exercises/smart-new-05-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/sprint",
         "originalVideo": "https://api.smartworkout.app/asset/video/634a68de-982f-47c6-9008-523e6cc57be6.mp4",
@@ -251,8 +251,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-05-video.mp4",
-        "poster": "media/exercises/smart-new-05-video.webp",
+        "src": "media/exercises/smart-new-05-video.webm",
+        "poster": "media/exercises/smart-new-05-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/sprint",
         "originalVideo": "https://api.smartworkout.app/asset/video/634a68de-982f-47c6-9008-523e6cc57be6.mp4",
@@ -264,8 +264,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-06-video.mp4",
-        "poster": "media/exercises/smart-new-06-video.webp",
+        "src": "media/exercises/smart-new-06-video.webm",
+        "poster": "media/exercises/smart-new-06-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/countermovement-jump",
         "originalVideo": "https://api.smartworkout.app/asset/video/b4cbc91c-6e00-4dcc-8831-754711e9976e.mp4",
@@ -278,8 +278,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-04-video.mp4",
-        "poster": "media/exercises/smart-new-04-video.webp",
+        "src": "media/exercises/smart-new-04-video.webm",
+        "poster": "media/exercises/smart-new-04-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/depth-jump",
         "originalVideo": "https://api.smartworkout.app/asset/video/d901921d-6431-4ba1-bf0a-acd26174cb0c.mp4",
@@ -292,8 +292,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-047-video.mp4",
-        "poster": "media/exercises/lyfta-047-video.webp",
+        "src": "media/exercises/lyfta-047-video.webm",
+        "poster": "media/exercises/lyfta-047-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/skater-hops-8oo",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/33611201-Skater-Hops.mp4",
@@ -305,8 +305,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-049-video.mp4",
-        "poster": "media/exercises/lyfta-049-video.webp",
+        "src": "media/exercises/lyfta-049-video.webm",
+        "poster": "media/exercises/lyfta-049-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/dumbbell-single-leg-calf-raise-6kt",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/04091201-Dumbbell-Single-Leg-Calf-Raise_Calves.mp4",
@@ -319,8 +319,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-054-video.mp4",
-        "poster": "media/exercises/lyfta-054-video.webp",
+        "src": "media/exercises/lyfta-054-video.webm",
+        "poster": "media/exercises/lyfta-054-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/dumbbell-seated-calf-raise-79f",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/13791201-Dumbbell-Seated-Calf-Raise_Calves.mp4",
@@ -332,8 +332,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-fix-external-video.mp4",
-        "poster": "media/exercises/lyfta-fix-external-video.webp",
+        "src": "media/exercises/lyfta-fix-external-video.webm",
+        "poster": "media/exercises/lyfta-fix-external-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/standing-shoulder-external-rotation-7a",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/02351201-Cable-Standing-Shoulder-External-Rotation_Back_.mp4",
@@ -346,8 +346,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-10-video.mp4",
-        "poster": "media/exercises/smart-new-10-video.webp",
+        "src": "media/exercises/smart-new-10-video.webm",
+        "poster": "media/exercises/smart-new-10-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/back/band-standing-external-rotation",
         "originalVideo": "https://api.smartworkout.app/asset/video/408f4166-44c0-48d5-87ac-7788551130bb.mp4",
@@ -360,8 +360,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-060-video.mp4",
-        "poster": "media/exercises/smart-060-video.webp",
+        "src": "media/exercises/smart-060-video.webm",
+        "poster": "media/exercises/smart-060-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/chest/clap-push-up",
         "originalVideo": "https://api.smartworkout.app/asset/video/3eee6526-9f25-4102-be30-39d783599365.mp4",
@@ -373,8 +373,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-063-video.mp4",
-        "poster": "media/exercises/lyfta-063-video.webp",
+        "src": "media/exercises/lyfta-063-video.webm",
+        "poster": "media/exercises/lyfta-063-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/51441201-Medicine-Ball-Chest-Pass-against-Wall_Chest_.mp4",
@@ -387,8 +387,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-065-video.mp4",
-        "poster": "media/exercises/lyfta-065-video.webp",
+        "src": "media/exercises/lyfta-065-video.webm",
+        "poster": "media/exercises/lyfta-065-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/one-arm-bent-over-row-8h",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/02921201-Dumbbell-Bent-over-Row_Back-FIX_.mp4",
@@ -401,8 +401,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-067-video.mp4",
-        "poster": "media/exercises/smart-067-video.webp",
+        "src": "media/exercises/smart-067-video.webm",
+        "poster": "media/exercises/smart-067-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/chest/one-arm-dumbbell-bench-press",
         "originalVideo": "https://api.smartworkout.app/asset/video/5ad0fcdc-a1cd-4d26-a219-d451352dc27f.mp4",
@@ -415,8 +415,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-069-video.mp4",
-        "poster": "media/exercises/lyfta-069-video.webp",
+        "src": "media/exercises/lyfta-069-video.webm",
+        "poster": "media/exercises/lyfta-069-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/archer-push-up-8mu",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/32941201-Archer-Push-up_Chest.mp4",
@@ -428,8 +428,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-065-video.mp4",
-        "poster": "media/exercises/lyfta-065-video.webp",
+        "src": "media/exercises/lyfta-065-video.webm",
+        "poster": "media/exercises/lyfta-065-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/one-arm-bent-over-row-8h",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/02921201-Dumbbell-Bent-over-Row_Back-FIX_.mp4",
@@ -441,8 +441,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-073-video.mp4",
-        "poster": "media/exercises/lyfta-073-video.webp",
+        "src": "media/exercises/lyfta-073-video.webm",
+        "poster": "media/exercises/lyfta-073-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/wheel-rollout--7w1",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/08571201-Wheel-Rollout_Waist-FIX_.mp4",
@@ -469,8 +469,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-077-video.mp4",
-        "poster": "media/exercises/lyfta-077-video.webp",
+        "src": "media/exercises/lyfta-077-video.webm",
+        "poster": "media/exercises/lyfta-077-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/dumbbell-swing-8ov",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/33681201-Dumbbell-Swing_Hips.mp4",
@@ -482,8 +482,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-082-video.mp4",
-        "poster": "media/exercises/lyfta-082-video.webp",
+        "src": "media/exercises/lyfta-082-video.webm",
+        "poster": "media/exercises/lyfta-082-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/dumbbell-single-leg-deadlift-7ht",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/26351201-Dumbbell-Single-Leg-Deadlift-(female)_Hips.mp4",
@@ -495,8 +495,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-084-video.mp4",
-        "poster": "media/exercises/lyfta-084-video.webp",
+        "src": "media/exercises/lyfta-084-video.webm",
+        "poster": "media/exercises/lyfta-084-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/trap-bar-deadlift-6vz",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/08111201-Trap-Bar-Deadlift_Thighs-FIX_.mp4",
@@ -508,8 +508,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-086-video.mp4",
-        "poster": "media/exercises/lyfta-086-video.webp",
+        "src": "media/exercises/lyfta-086-video.webm",
+        "poster": "media/exercises/lyfta-086-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/77461201-Nordic-Hamstring-Curl-(male)_Thighs_.mp4",
@@ -568,8 +568,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-05-video.mp4",
-        "poster": "media/exercises/smart-new-05-video.webp",
+        "src": "media/exercises/smart-new-05-video.webm",
+        "poster": "media/exercises/smart-new-05-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/legs/sprint",
         "originalVideo": "https://api.smartworkout.app/asset/video/634a68de-982f-47c6-9008-523e6cc57be6.mp4",
@@ -581,8 +581,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/smart-new-11-video.mp4",
-        "poster": "media/exercises/smart-new-11-video.webp",
+        "src": "media/exercises/smart-new-11-video.webm",
+        "poster": "media/exercises/smart-new-11-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/chest/punching-bag-boxing",
         "originalVideo": "https://api.smartworkout.app/asset/video/8d12dabe-ce8c-49d2-a0d9-5a0080e2aeee.mp4",
@@ -594,8 +594,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-042-video.mp4",
-        "poster": "media/exercises/lyfta-042-video.webp",
+        "src": "media/exercises/lyfta-042-video.webm",
+        "poster": "media/exercises/lyfta-042-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/run--7sn",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/21961201-Run-(female)_Cardio.mp4",
