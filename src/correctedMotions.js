@@ -1,7 +1,7 @@
 // Precise guides for motions that do not have a matching source clip.
 // Coordinates use the existing Anatomy / MuscleFigure joint system.
 const pose=(h,s,p,el,hl,er,hr,kl,fl,kr,fr)=>({h,s,p,el,hl,er,hr,kl,fl,kr,fr});
-export const correctedExerciseIds=['ankle'];
+export const correctedExerciseIds=[];
 export const reachDirections=['앞','뒤','좌','우','앞왼쪽 대각','앞오른쪽 대각','뒤왼쪽 대각','뒤오른쪽 대각'];
 export const reachTargets=[[218,419],[218,355],[138,391],[347,391],[151,412],[317,412],[151,362],[317,362]];
 const balance=pose([245,108],[245,148],[245,258],[177,175],[128,186],[313,175],[362,186],[224,326],[218,393],[286,323],[287,370]);

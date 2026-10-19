@@ -1,30 +1,30 @@
 // Source references are retained for the locally edited exercise demonstrations.
 export const exerciseMedia = {
   "ankle": {
-    "note": "참고 영상은 벽 종아리 스트레치입니다. 원운동은 앞발 뒤꿈치를 붙이고 앞무릎을 전진합니다.",
+    "note": "무릎 지지·뒤꿈치 고정 3D 자세 이미지를 부분 변형한 참고 모션입니다. P(수동) → I(바닥 누르기) → A(능동 배굴) 순서이며, 실제 운동에서는 각 단계를 약 10초 유지합니다. 화면은 짧게 압축한 시범입니다.",
     "variants": [
       {
-        "label": "발목 가동성 참고",
-        "src": "media/exercises/smart-new-07-video.mp4",
-        "poster": "media/exercises/smart-new-07-video.webp",
-        "provider": "SmartWorkout",
-        "source": "https://smartworkout.app/en/exercise-library/legs/wall-calf-stretch",
-        "originalVideo": "https://api.smartworkout.app/asset/video/6d793b62-112e-4371-9471-0f98db8a0e06.mp4",
-        "sourceExercise": "Wall Calf Stretch"
+        "label": "P–I–A 배굴",
+        "src": "media/exercises/ankle-pia-video.webm",
+        "poster": "media/exercises/ankle-pia-video-cutout.webp",
+        "provider": "Lyfta",
+        "source": "https://www.lyfta.app/exercises",
+        "originalImage": "https://apilyfta.com/static/GymvisualPNG/18921101-Kneeling-Heel-Down-Achilles-Stretch_Calves_small.png",
+        "sourceExercise": "Kneeling Heel Down Achilles Stretch · P–I–A edit"
       }
     ]
   },
   "reach3": {
-    "note": "뒤로 든 다리를 옆·바닥 쪽으로 더 낮게 뻗도록 부분 변형한 참고 영상입니다. 8방향 터치의 정확한 방향과 범위는 운동 노트를 따릅니다.",
+    "note": "서 있는 한발 균형 원본의 다리 부분을 편집한 8방향 참고 모션입니다. 지지발은 유지하고 반대발은 바닥 가까이 뻗었다 돌아옵니다. 실제 훈련에서는 작은 물체를 발로 가져오거나 목표점을 가볍게 터치합니다.",
     "variants": [
       {
-        "label": "한발 균형 참고",
-        "src": "media/exercises/lyfta-reach-balance-video.webm",
-        "poster": "media/exercises/lyfta-reach-balance-video-cutout.webp",
+        "label": "8방향 균형",
+        "src": "media/exercises/reach-eight-video.webm",
+        "poster": "media/exercises/reach-eight-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
-        "originalVideo": "https://apilyfta.com/static/GymvisualMP4/67501201-Standing-Balance-Hip-Rotation-(female)_Hips_.mp4",
-        "sourceExercise": "Standing Balance Hip Rotation (female)"
+        "originalVideo": "https://apilyfta.com/static/GymvisualMP4/59751201-Single-Leg-Balance-Cross-Punch-(male)_Plyometrics_.mp4",
+        "sourceExercise": "Standing single-leg balance · eight-direction leg edit"
       }
     ]
   },
@@ -81,7 +81,7 @@ export const exerciseMedia = {
     ]
   },
   "wristrock": {
-    "note": "원본 손목 스트레치 영상입니다. 안쪽·바깥쪽 손 방향 전환과 체중이동 수정은 아직 영상에 반영되지 않았습니다.",
+    "note": "원본 손·전완 이미지를 부분 편집했습니다. 안쪽 약 2초 → 정방향 약 2초 → 바깥쪽 약 2초 순서입니다. 자세를 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 손을 다시 놓습니다.",
     "variants": [
       {
         "label": "손목 제어 참고",
@@ -451,7 +451,7 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "Explosive Push-up 영상의 전완·손 방향을 재사용한 부분 변형입니다. 손가락은 바닥을 지지한 채 손바닥 밑부분을 더 분명하게 들어 올렸다 내립니다. 팔꿈치 각도는 유지합니다.",
+    "note": "참고 영상의 손바닥 동작에 맞춰 부분 편집했습니다. 손가락을 고정하고 손바닥 뒤꿈치를 들어 올렸다 내립니다. 팔꿈치를 펴는 힘보다 손바닥으로 바닥을 미는 동작을 봅니다.",
     "variants": [
       {
         "label": "손목 부하 참고",
@@ -518,7 +518,7 @@ export const exerciseMedia = {
     ]
   },
   "thoracic": {
-    "note": "원본 3D 영상을 부분 변형했습니다. 흉추 회전으로 가슴을 연 뒤 팔꿈치를 접어 손을 뒷목으로 옮기고, 잠시 유지한 뒤 돌아옵니다. 허리와 골반은 고정합니다.",
+    "note": "기존 3D 영상의 상완·전완을 분리해 연결한 부분 편집입니다. 손을 뒷목에 둔 짧은 회전 범위를 보여줍니다. 골반과 허리를 고정하고 가슴과 팔꿈치를 함께 회전합니다.",
     "variants": [
       {
         "label": "기본 동작",

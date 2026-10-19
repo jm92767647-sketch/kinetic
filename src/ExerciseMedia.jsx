@@ -4,7 +4,7 @@ import {exerciseMedia} from './exerciseMedia.js';
 import {correctedExerciseIds} from './correctedMotions.js';
 import TransparentVideo from './TransparentVideo.jsx';
 
-const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=refined-20261019-6`;
+const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=reference-20261019-7`;
 
 export default function ExerciseMedia({exercise:e}){
  const [variantIndex,setVariantIndex]=useState(0);
