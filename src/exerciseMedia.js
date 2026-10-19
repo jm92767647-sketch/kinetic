@@ -81,7 +81,7 @@ export const exerciseMedia = {
     ]
   },
   "wristrock": {
-    "note": "안쪽 → 정방향 → 바깥쪽으로 약 2초씩 놓습니다. 방향을 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 다시 놓습니다. 손목 움직임을 보여주도록 부분 편집한 참고 영상입니다.",
+    "note": "안쪽에서 정방향으로 손을 다시 놓는 참고 영상입니다. 바깥쪽 회전은 생략했습니다. 방향을 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 다시 놓습니다. 푸시업 영상의 손 모양을 연결해 부분 편집했습니다.",
     "variants": [
       {
         "label": "손목 제어 참고",
@@ -90,7 +90,8 @@ export const exerciseMedia = {
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/wrist-ulnar-deviator-and-flexor-stretch-7jl",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/18251201-Wrist-Ulnar-Deviator-And-Flexor-Stretch-(female)_F.mp4",
-        "sourceExercise": "Wrist Ulnar Deviator And Flexor Stretch"
+        "sourceExercise": "Wrist Ulnar Deviator And Flexor Stretch · inward / neutral edit",
+        "handEditSource": "https://smartworkout.app/en/exercise-library/chest/clap-push-up"
       }
     ]
   },
@@ -518,7 +519,7 @@ export const exerciseMedia = {
     ]
   },
   "thoracic": {
-    "note": "시작 자세 → 흉추 회전 → 복귀의 전체 동작입니다. 열린 자세에서 팔꿈치를 접어 손을 뒷목으로 가져옵니다. 골반과 허리를 고정하고 가슴과 팔꿈치를 함께 회전합니다. 팔 동작을 부분 편집한 참고 영상입니다.",
+    "note": "시작 자세에서 손을 떼어 먼저 뒷목으로 가져온 뒤 가슴과 팔꿈치를 함께 회전합니다. 골반과 허리를 고정하고 회전 후 복귀합니다. 팔 동작과 연결부를 부분 편집한 참고 영상입니다.",
     "variants": [
       {
         "label": "기본 동작",
