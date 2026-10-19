@@ -3,7 +3,7 @@ import Anatomy from './Anatomy';
 import {exerciseMedia} from './exerciseMedia.js';
 import {correctedExerciseIds} from './correctedMotions.js';
 
-const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=solid-20261019-3`;
+const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=motion-20261019-4`;
 
 export default function ExerciseMedia({exercise:e}){
  const [variantIndex,setVariantIndex]=useState(0);

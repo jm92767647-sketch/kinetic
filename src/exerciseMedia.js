@@ -1,4 +1,4 @@
-// Verified source clips; local WebM variants have transparent backgrounds.
+// Verified source clips; locally edited variants are described in each note.
 export const exerciseMedia = {
   "ankle": {
     "note": "참고 영상은 벽 종아리 스트레치입니다. 원운동은 앞발 뒤꿈치를 붙이고 앞무릎을 전진합니다.",
@@ -15,7 +15,7 @@ export const exerciseMedia = {
     ]
   },
   "reach3": {
-    "note": "한발 균형·고관절 방향 제어 참고입니다. 발끝으로 8방향을 터치하는 동작은 운동 노트를 따릅니다.",
+    "note": "기존 한발 균형 영상에 뒤로 든 다리의 옆·아래 이동을 부분 변형으로 추가했습니다. 8방향 터치의 정확한 방향과 범위는 운동 노트를 따릅니다.",
     "variants": [
       {
         "label": "한발 균형 참고",
@@ -451,7 +451,7 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "원본 손목 푸쉬업 영상입니다. 손가락을 고정하고 손바닥 밑부분만 들어 올리는 수정은 아직 영상에 반영되지 않았습니다.",
+    "note": "원본 3D 영상을 부분 변형했습니다. 손가락 접점은 고정하고 손바닥 밑부분과 상체를 작게 올렸다 내립니다. 팔꿈치 굽힘보다 손목·손의 제어에 집중합니다.",
     "variants": [
       {
         "label": "손목 부하 참고",
@@ -532,7 +532,7 @@ export const exerciseMedia = {
     ]
   },
   "proney": {
-    "note": "원본 W·T·Y 동작 영상입니다. 상체를 먼저 띄우는 단계는 아직 영상에 반영되지 않았습니다.",
+    "note": "원본 3D 영상을 부분 변형했습니다. 가슴 윗부분을 먼저 살짝 띄운 뒤 높이를 유지하며 팔 동작을 수행합니다. W → T → Y 중 맞는 단계를 선택합니다.",
     "variants": [
       {
         "label": "W",
