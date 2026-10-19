@@ -81,7 +81,7 @@ export const exerciseMedia = {
     ]
   },
   "wristrock": {
-    "note": "안쪽에서 정방향으로 손을 다시 놓는 참고 영상입니다. 바깥쪽 회전은 생략했습니다. 방향을 바꿀 때는 손의 하중을 풀고 통증 없는 범위에서 다시 놓습니다. 푸시업 영상의 손 모양을 연결해 부분 편집했습니다.",
+    "note": "수정 전 원본의 손과 손목 방향을 유지했습니다. 손은 바닥에 둔 채 상체 전체가 머리 방향으로 천천히 기울었다 돌아오는 참고 모션입니다. 통증 없는 범위에서 작게 체중을 이동합니다.",
     "variants": [
       {
         "label": "손목 제어 참고",
@@ -90,8 +90,7 @@ export const exerciseMedia = {
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/wrist-ulnar-deviator-and-flexor-stretch-7jl",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/18251201-Wrist-Ulnar-Deviator-And-Flexor-Stretch-(female)_F.mp4",
-        "sourceExercise": "Wrist Ulnar Deviator And Flexor Stretch · inward / neutral edit",
-        "handEditSource": "https://smartworkout.app/en/exercise-library/chest/clap-push-up"
+        "sourceExercise": "Wrist Ulnar Deviator And Flexor Stretch · original hands / forward lean"
       }
     ]
   },
