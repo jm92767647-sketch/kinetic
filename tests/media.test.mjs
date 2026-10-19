@@ -44,6 +44,10 @@ test('corrected guides keep contact points fixed and sequence torso before arms'
 });
 
 test('requested clip choices and progression directions are preserved',()=>{
+ for(const id of ['thoracic','proney','reach3','wristrock','wristpress']){
+  assert.ok(!correctedExerciseIds.includes(id),id+' should show its source video');
+  assert.ok(exerciseMedia[id].variants.every(v=>v.src.endsWith('.webm')),id);
+ }
  assert.equal(exerciseMedia.decel.variants[0].src,exerciseMedia.flying.variants[0].src);
  assert.equal(exerciseMedia.bench.variants[0].sourceExercise,'One-Arm Dumbbell Bench Press');
  assert.equal(exerciseMedia.explosive.variants[0].originalVideo,'https://api.smartworkout.app/asset/video/3eee6526-9f25-4102-be30-39d783599365.mp4');

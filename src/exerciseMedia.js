@@ -19,8 +19,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "한발 균형 참고",
-        "src": "media/exercises/lyfta-reach-balance-video.mp4",
-        "poster": "media/exercises/lyfta-reach-balance-video.webp",
+        "src": "media/exercises/lyfta-reach-balance-video.webm",
+        "poster": "media/exercises/lyfta-reach-balance-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/67501201-Standing-Balance-Hip-Rotation-(female)_Hips_.mp4",
@@ -81,12 +81,12 @@ export const exerciseMedia = {
     ]
   },
   "wristrock": {
-    "note": "손목 굴근 스트레치 참고입니다. 네 방향 체중이동과 손등 지지를 모두 보여주는 영상은 아닙니다.",
+    "note": "원본 손목 스트레치 영상입니다. 안쪽·바깥쪽 손 방향 전환과 체중이동 수정은 아직 영상에 반영되지 않았습니다.",
     "variants": [
       {
         "label": "손목 제어 참고",
-        "src": "media/exercises/lyfta-012-video.mp4",
-        "poster": "media/exercises/lyfta-012-video.webp",
+        "src": "media/exercises/lyfta-012-video.webm",
+        "poster": "media/exercises/lyfta-012-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/wrist-ulnar-deviator-and-flexor-stretch-7jl",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/18251201-Wrist-Ulnar-Deviator-And-Flexor-Stretch-(female)_F.mp4",
@@ -451,12 +451,12 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "손목 푸쉬업 참고입니다. 원운동은 손바닥을 유지한 채 체중을 점진적으로 앞으로 옮깁니다.",
+    "note": "원본 손목 푸쉬업 영상입니다. 손가락을 고정하고 손바닥 밑부분만 들어 올리는 수정은 아직 영상에 반영되지 않았습니다.",
     "variants": [
       {
         "label": "손목 부하 참고",
-        "src": "media/exercises/smart-new-08-video.mp4",
-        "poster": "media/exercises/smart-new-08-video.webp",
+        "src": "media/exercises/smart-new-08-video.webm",
+        "poster": "media/exercises/smart-new-08-video-cutout.webp",
         "provider": "SmartWorkout",
         "source": "https://smartworkout.app/en/exercise-library/forearms/wrist-push-up",
         "originalVideo": "https://api.smartworkout.app/asset/video/d9a6c488-ede0-4dcd-8611-0bd194e94614.mp4",
@@ -522,8 +522,8 @@ export const exerciseMedia = {
     "variants": [
       {
         "label": "기본 동작",
-        "src": "media/exercises/lyfta-090-video.mp4",
-        "poster": "media/exercises/lyfta-090-video.webp",
+        "src": "media/exercises/lyfta-090-video.webm",
+        "poster": "media/exercises/lyfta-090-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercise/kneeling-back-rotation-stretch--93s",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/18121201-Kneeling-Back-Rotation-Stretch_Back.mp4",
@@ -532,12 +532,12 @@ export const exerciseMedia = {
     ]
   },
   "proney": {
-    "note": "W → T → Y 팔 위치 progression 참고입니다. 허리 대신 윗등에서 가슴 윗부분을 살짝 들어 올립니다.",
+    "note": "원본 W·T·Y 동작 영상입니다. 상체를 먼저 띄우는 단계는 아직 영상에 반영되지 않았습니다.",
     "variants": [
       {
         "label": "W",
-        "src": "media/exercises/lyfta-092-video.mp4",
-        "poster": "media/exercises/lyfta-092-video.webp",
+        "src": "media/exercises/lyfta-092-video.webm",
+        "poster": "media/exercises/lyfta-092-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/50421201-Lying-Prone-W_Back_.mp4",
@@ -545,8 +545,8 @@ export const exerciseMedia = {
       },
       {
         "label": "T",
-        "src": "media/exercises/lyfta-094-video.mp4",
-        "poster": "media/exercises/lyfta-094-video.webp",
+        "src": "media/exercises/lyfta-094-video.webm",
+        "poster": "media/exercises/lyfta-094-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/50411201-Lying-Prone-T_Back_.mp4",
@@ -554,8 +554,8 @@ export const exerciseMedia = {
       },
       {
         "label": "Y",
-        "src": "media/exercises/lyfta-096-video.mp4",
-        "poster": "media/exercises/lyfta-096-video.webp",
+        "src": "media/exercises/lyfta-096-video.webm",
+        "poster": "media/exercises/lyfta-096-video-cutout.webp",
         "provider": "Lyfta",
         "source": "https://www.lyfta.app/exercises",
         "originalVideo": "https://apilyfta.com/static/GymvisualMP4/58001201-Bodyweight-Lying-Prone-Ys_Back_.mp4",
