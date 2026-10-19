@@ -133,7 +133,7 @@ export const exercises = [
   {
     "id": "split",
     "day": 0,
-    "name": "점프 불가리안 스플릿 스쿼트",
+    "name": "Jump Bulgarian Split Squat",
     "tags": [
       "한발 파워"
     ],
@@ -403,7 +403,7 @@ export const exercises = [
   {
     "id": "rotation",
     "day": 1,
-    "name": "회전 메디신볼 던지기",
+    "name": "Rotational Medicine-ball Throw",
     "tags": [
       "회전 파워"
     ],
@@ -798,7 +798,7 @@ export const exercises = [
   {
     "id": "decel",
     "day": 2,
-    "name": "15m 최대가속 → 감속",
+    "name": "15m Max Acceleration → Deceleration",
     "tags": [
       "가속",
       "감속"
@@ -1210,7 +1210,7 @@ export const exercises = [
   {
     "id": "chest",
     "day": 3,
-    "name": "메디신볼 체스트패스",
+    "name": "Medicine-ball Chest Pass",
     "tags": [
       "상체 파워"
     ],
@@ -1339,7 +1339,7 @@ export const exercises = [
   {
     "id": "hardpush",
     "day": 3,
-    "name": "고난도 Push-up",
+    "name": "High-difficulty Push-up",
     "tags": [
       "최대근력"
     ],
@@ -1610,7 +1610,7 @@ export const exercises = [
   {
     "id": "trap",
     "day": 4,
-    "name": "트랩바 데드리프트",
+    "name": "Trap-bar Deadlift",
     "tags": [
       "최대근력"
     ],
@@ -1793,7 +1793,7 @@ export const exercises = [
   {
     "id": "interval",
     "day": 5,
-    "name": "반복 Sprint Interval",
+    "name": "Repeated Sprint Interval",
     "tags": [
       "인터벌",
       "가속"
@@ -1842,7 +1842,7 @@ export const exercises = [
   {
     "id": "boxing",
     "day": 5,
-    "name": "복싱 인터벌 대체모드",
+    "name": "Boxing / Upper-body Interval",
     "tags": [
       "인터벌"
     ],
@@ -1889,7 +1889,7 @@ export const exercises = [
   {
     "id": "run",
     "day": 5,
-    "name": "장거리 러닝",
+    "name": "Long Run",
     "tags": [
       "장거리 지구력"
     ],

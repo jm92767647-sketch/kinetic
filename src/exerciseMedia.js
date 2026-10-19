@@ -1,4 +1,4 @@
-// Original source references are retained for locally edited motion clips.
+// Source references are retained for the locally edited exercise demonstrations.
 export const exerciseMedia = {
   "ankle": {
     "note": "참고 영상은 벽 종아리 스트레치입니다. 원운동은 앞발 뒤꿈치를 붙이고 앞무릎을 전진합니다.",
@@ -451,16 +451,16 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "승인된 Explosive Push-up 영상의 전완·손 방향을 재사용한 부분 변형입니다. 손가락 접점을 고정한 채 손바닥 밑부분을 올렸다 내리고 팔꿈치 각도는 유지합니다.",
+    "note": "Explosive Push-up 영상의 전완·손 방향을 재사용한 부분 변형입니다. 손가락은 바닥을 지지한 채 손바닥 밑부분을 더 분명하게 들어 올렸다 내립니다. 팔꿈치 각도는 유지합니다.",
     "variants": [
       {
         "label": "손목 부하 참고",
         "src": "media/exercises/smart-new-08-video.webm",
         "poster": "media/exercises/smart-new-08-video-cutout.webp",
         "provider": "SmartWorkout",
-        "source": "https://smartworkout.app/en/exercise-library/forearms/wrist-push-up",
-        "originalVideo": "https://api.smartworkout.app/asset/video/d9a6c488-ede0-4dcd-8611-0bd194e94614.mp4",
-        "sourceExercise": "Wrist Push-Up"
+        "source": "https://smartworkout.app/en/exercise-library/chest/clap-push-up",
+        "originalVideo": "https://api.smartworkout.app/asset/video/3eee6526-9f25-4102-be30-39d783599365.mp4",
+        "sourceExercise": "Clap Push-Up · palm-heel press edit"
       }
     ]
   },
@@ -518,7 +518,7 @@ export const exerciseMedia = {
     ]
   },
   "thoracic": {
-    "note": "네발 흉추 회전 참고입니다. 원운동은 손을 뒤통수에 두고 엉덩이를 뒤꿈치 쪽으로 보냅니다.",
+    "note": "원본 3D 영상을 부분 변형했습니다. 흉추 회전으로 가슴을 연 뒤 팔꿈치를 접어 손을 뒷목으로 옮기고, 잠시 유지한 뒤 돌아옵니다. 허리와 골반은 고정합니다.",
     "variants": [
       {
         "label": "기본 동작",
