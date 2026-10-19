@@ -38,3 +38,11 @@
 .matrix-cell-note{font-size:12px;color:#7d95a8;margin-top:12px;line-height:1.85}.matrix-footnote{font-size:12px;color:#6e8597;line-height:1.9;margin-top:18px;max-width:950px}
 @media(max-width:1150px){.program-matrix{padding:0 28px 35px}}
 @media(max-width:700px){.program-matrix{padding:0 20px 30px}.matrix-intro h1{font-size:22px}.matrix-intro small{display:block;font-size:12px;color:#8aa5b9;margin-top:8px}.matrix-table{font-size:13px}.matrix-table thead tr:nth-child(2) th{font-size:13px}.matrix-exercise small,.matrix-alternative,.matrix-cell-note{font-size:13px}.matrix-label-column{width:145px}}
+
+/* Local motion clips share the existing movement panel and controls. */
+.exercise-media-stage{width:100%;aspect-ratio:500/470;max-height:540px;display:flex;align-items:center;justify-content:center}
+.exercise-video{display:block;width:100%;height:100%;max-height:540px;object-fit:contain;border-radius:8px}
+.media-variants{display:flex;justify-content:center;gap:8px;margin:-8px 0 18px;flex-wrap:wrap}.media-variants button{font-size:12px;min-height:36px;padding:6px 15px;border-radius:20px;color:#6b89a1}.media-variants button.active{background:#dfedf8;color:#246da9}
+.media-reference-note{font-size:12px;line-height:1.85;color:#6e8597;text-align:center;margin:16px auto 0;max-width:460px;padding:0 12px}.media-source{font-size:11px;color:#8a9fae;text-align:center;margin:10px auto 0;line-height:1.8;overflow-wrap:anywhere}.media-source a:hover{color:#246da9;text-decoration:underline}
+.media-fallback{font-size:12px;color:#8a9fae;text-align:center;margin-bottom:15px}.media-fallback button{font-size:12px;color:#327dbe;min-height:32px}
+@media(max-width:700px){.exercise-media-stage,.exercise-video{max-height:470px}.media-reference-note{padding:0 6px}.media-source{font-size:11px}}

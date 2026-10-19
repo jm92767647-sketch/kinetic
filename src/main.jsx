@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import{createRoot}from'react-dom/client';
 import{days,displayTag,strengthBlock,conditioningPlan,regionMuscles,trainingGroups,matchesTrainingGroup,principles,exercises,powerWarning,progressionType}from'./data';
-import Anatomy from './Anatomy';
+import ExerciseMedia from './ExerciseMedia.jsx';
 import ProgramMatrix from './ProgramMatrix.jsx';
 import './styles.css';
 const isPower=e=>e.tags.some(t=>t.includes('파워'));
@@ -50,10 +50,10 @@ function App(){
     <div className="exercise-list" aria-label="운동 목록">{visible.map(x=><button key={x.id} className={'exercise-item '+(e?.id===x.id?'active ':'')+(x.parent?'is-alternative':'')} onClick={()=>choose(x.id)} aria-pressed={e?.id===x.id} aria-label={x.parent?x.name+(x.relation==='advanced'?' (고급 선택)':' (대체운동)'):x.name}>{x.parent&&<span className="alternative-branch" aria-hidden="true">↳</span>}{x.name}</button>)}</div>
     {!visible.length&&<div className="empty"><p>일치하는 운동이 없습니다.</p><button onClick={reset}>필터 초기화</button></div>}
    </aside>
-   {e?<><div className="center"><a className="mobile-exercise-jump" href="#exercise-browser">운동 선택 ↓</a><Anatomy key={e.id} exercise={e}/></div>
+   {e?<><div className="center"><a className="mobile-exercise-jump" href="#exercise-browser">운동 선택 ↓</a><ExerciseMedia key={e.id} exercise={e}/></div>
     <aside className="detail"><h2 className="notes-heading">운동 노트</h2>{parent&&<button className="parent-link" onClick={()=>showRelated(parent.id)}>← {parent.name}</button>}{e.day===5&&<section className="purpose" aria-label="컨디셔닝 주간 구성"><h3>근지구력 · A/B주 교대</h3>{conditioningPlan.weeks.map(w=><p key={w.name}><b>{w.name}</b> {w.text}</p>)}<p>{conditioningPlan.note}</p></section>}<Details e={e} select={showRelated}/>{alternatives.map(a=><Details key={a.id} e={a} select={showRelated} nested/>)}</aside></>:<div className="no-results"><p>다른 부위나 근육을 선택해 보세요.</p></div>}
   </main>}
-  <footer>동작 이해를 위한 2차원 가이드</footer>
+  <footer>동작 이해를 위한 운동 가이드</footer>
  </>;
 }
 createRoot(document.getElementById('root')).render(<App/>);
