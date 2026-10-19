@@ -1,4 +1,4 @@
-// Verified source clips; locally edited variants are described in each note.
+// Original source references are retained for locally edited motion clips.
 export const exerciseMedia = {
   "ankle": {
     "note": "참고 영상은 벽 종아리 스트레치입니다. 원운동은 앞발 뒤꿈치를 붙이고 앞무릎을 전진합니다.",
@@ -15,7 +15,7 @@ export const exerciseMedia = {
     ]
   },
   "reach3": {
-    "note": "기존 한발 균형 영상에 뒤로 든 다리의 옆·아래 이동을 부분 변형으로 추가했습니다. 8방향 터치의 정확한 방향과 범위는 운동 노트를 따릅니다.",
+    "note": "뒤로 든 다리를 옆·바닥 쪽으로 더 낮게 뻗도록 부분 변형한 참고 영상입니다. 8방향 터치의 정확한 방향과 범위는 운동 노트를 따릅니다.",
     "variants": [
       {
         "label": "한발 균형 참고",
@@ -451,7 +451,7 @@ export const exerciseMedia = {
     ]
   },
   "wristpress": {
-    "note": "원본 3D 영상을 부분 변형했습니다. 손가락 접점은 고정하고 손바닥 밑부분과 상체를 작게 올렸다 내립니다. 팔꿈치 굽힘보다 손목·손의 제어에 집중합니다.",
+    "note": "승인된 Explosive Push-up 영상의 전완·손 방향을 재사용한 부분 변형입니다. 손가락 접점을 고정한 채 손바닥 밑부분을 올렸다 내리고 팔꿈치 각도는 유지합니다.",
     "variants": [
       {
         "label": "손목 부하 참고",

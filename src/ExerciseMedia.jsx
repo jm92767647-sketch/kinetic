@@ -2,8 +2,9 @@ import React,{useEffect,useRef,useState} from 'react';
 import Anatomy from './Anatomy';
 import {exerciseMedia} from './exerciseMedia.js';
 import {correctedExerciseIds} from './correctedMotions.js';
+import TransparentVideo from './TransparentVideo.jsx';
 
-const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=motion-20261019-4`;
+const assetUrl=path=>`${import.meta.env.BASE_URL}${path}?v=mobile-20261019-5`;
 
 export default function ExerciseMedia({exercise:e}){
  const [variantIndex,setVariantIndex]=useState(0);
@@ -35,8 +36,8 @@ export default function ExerciseMedia({exercise:e}){
 
  return <section className="movement">
   <h1 className="movement-heading">{e.name}</h1>
-  <div className="exercise-media-stage">
-   <video key={variant.src} ref={videoRef} className="exercise-video" src={assetUrl(variant.src)} poster={assetUrl(variant.poster)} aria-label={`${e.name} · ${variant.sourceExercise} 동작 영상`} muted loop playsInline preload="metadata" autoPlay={!paused} onPlay={()=>setPaused(false)} onPause={()=>setPaused(true)} onError={()=>setFailed(true)}/>
+  <div className="exercise-media-stage" style={{position:'relative'}}>
+   <TransparentVideo key={variant.src} videoRef={videoRef} src={assetUrl(variant.src.replace(/\.webm$/,'-packed.mp4'))} poster={assetUrl(variant.poster)} label={`${e.name} · ${variant.sourceExercise} 동작 영상`} autoPlay={!paused} onPlay={()=>setPaused(false)} onPause={()=>setPaused(true)} onError={()=>setFailed(true)}/>
   </div>
   <div className="animation-controls">
    <button className="pause-button" onClick={toggle} aria-pressed={paused}>{paused?'▷ 재생':'Ⅱ 일시정지'}</button>
