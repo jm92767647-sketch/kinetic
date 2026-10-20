@@ -23,7 +23,7 @@ export default function ProgramMatrix(){return <main className="program-matrix">
    <colgroup><col className="matrix-label-column"/>{matrixColumns.flatMap(g=>g.names).map(n=><col key={n}/>)}</colgroup>
    <thead><tr><th rowSpan={2} scope="col" className="matrix-row-label">훈련 요소</th>{matrixColumns.map(g=><th key={g.group} colSpan={g.names.length} scope="colgroup">{g.group}</th>)}</tr>
     <tr>{matrixColumns.flatMap(g=>g.names).map(n=><th key={n} scope="col">{n}</th>)}</tr></thead>
-   <tbody>{matrixRows.map(row=><tr key={row.name}><th scope="row" className="matrix-row-label">{row.name}</th>{row.cells.map((c,i)=><td key={i} colSpan={c.span}>
+   <tbody>{matrixRows.map(row=><tr key={row.name}><th scope="row" className="matrix-row-label">{row.name==='최대근력(근비대)'?<>최대근력<wbr/>(근비대)</>:row.name}</th>{row.cells.map((c,i)=><td key={i} colSpan={c.span}>
     {c.title&&<h2>{c.title}</h2>}
     <div className={c.span>1?'matrix-entries merged':'matrix-entries'}>{c.entries.map(entry=><MatrixExercise key={entry.id} entry={entry} showDose={row.name==='근지구력'}/>)}</div>
     {c.note&&<p className="matrix-cell-note">{c.note}</p>}
