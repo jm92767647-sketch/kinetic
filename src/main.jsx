@@ -3,6 +3,7 @@ import{createRoot}from'react-dom/client';
 import{days,displayTag,strengthBlock,conditioningPlan,regionMuscles,trainingGroups,matchesTrainingGroup,principles,exercises,powerWarning,progressionType}from'./data';
 import ExerciseMedia from './ExerciseMedia.jsx';
 import ProgramMatrix from './ProgramMatrix.jsx';
+import WelcomeEntry from './Welcome.jsx';
 import './styles.css';
 const isPower=e=>e.tags.some(t=>t.includes('파워'));
 function Badge({tag}){return <span className={`badge ${tag.includes('파워')?'power':tag==='최대근력'?'strength':tag.includes('감속')||tag.includes('편심')?'brake':'other'}`}>{displayTag(tag)}</span>}
@@ -23,9 +24,9 @@ function Details({e,select,nested=false}){return <article className={nested?'alt
  {nested&&<button className="alt-action" onClick={()=>select(e.id)}>{e.relation==='advanced'?'이 고급 단계 동작 보기':'이 대체운동 동작 보기'} <span>↗</span></button>}
  </article>}
 
-function App(){
- const [mode,setMode]=useState('데이별');
- const [day,setDay]=useState(0),[region,setRegion]=useState(''),[muscle,setMuscle]=useState(''),[ability,setAbility]=useState('');
+function App({initialMode='데이별'}){
+ const [mode,setMode]=useState(initialMode);
+ const [day,setDay]=useState(initialMode==='데이별'?0:null),[region,setRegion]=useState(''),[muscle,setMuscle]=useState(''),[ability,setAbility]=useState('');
  const [selected,setSelected]=useState('ankle');
  const filters={mode,day,region,muscle,ability};
  const match=(x,f=filters)=>f.mode==='데이별'?(f.day===null||x.day===f.day):f.mode==='부위별'?(!f.region||x.regions.includes(f.region))&&(!f.muscle||[...x.primary,...x.secondary].includes(f.muscle)):matchesTrainingGroup(x,f.ability);
@@ -56,4 +57,4 @@ function App(){
   <footer>동작 이해를 위한 운동 가이드</footer>
  </>;
 }
-createRoot(document.getElementById('root')).render(<App/>);
+createRoot(document.getElementById('root')).render(<WelcomeEntry renderGuide={mode=><App key={mode} initialMode={mode}/>}/>);
