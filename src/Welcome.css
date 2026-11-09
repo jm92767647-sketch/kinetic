@@ -23,3 +23,9 @@
  .welcome-menu{gap:12px}
  .welcome-menu-link{--glass-radius:18px;min-height:52px;padding-block:7px;font-size:clamp(24px,4.6vw,32px)}
 }
+.welcome-transition{position:fixed;inset:0;z-index:10;overflow:hidden;overscroll-behavior:contain;touch-action:none}
+.welcome-transition-cover{position:absolute;inset:0;background:#f1f8fd}
+.welcome-transition-cover .welcome-menu-link{animation:welcome-depart .14s ease-out both}
+.welcome-transition-cover .welcome-menu-link[data-departing]{visibility:hidden}
+.welcome-flight-card{position:fixed;min-height:0;padding:0;transform-origin:top left;pointer-events:none}
+@keyframes welcome-depart{to{opacity:0}}
