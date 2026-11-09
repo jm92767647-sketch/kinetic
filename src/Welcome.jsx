@@ -12,7 +12,7 @@ const currentMode=()=>destinations.find(x=>x.hash===location.hash)?.mode||(locat
 export default function WelcomeEntry({renderGuide}){
  const [mode,setMode]=useState(currentMode);
  const [flight,setFlight]=useState(null);
- const guide=useRef(null),cover=useRef(null),card=useRef(null),focusTab=useRef(false);
+ const guide=useRef(null),overlay=useRef(null),card=useRef(null),focusTab=useRef(false);
 
  useEffect(()=>{
   const change=()=>{setMode(currentMode());setFlight(null);window.scrollTo(0,0)};
@@ -21,39 +21,54 @@ export default function WelcomeEntry({renderGuide}){
  },[]);
 
  useLayoutEffect(()=>{
-  const target=guide.current?.querySelector('.view-tabs button[aria-pressed="true"]');
+  const tabs=guide.current?.querySelectorAll('.view-tabs button');
+  const target=Array.from(tabs??[]).find(tab=>tab.dataset.viewMode===(flight?.destination.mode??mode));
   if(!flight){
    if(mode&&focusTab.current){target?.focus({preventScroll:true});focusTab.current=false}
    return;
   }
+  let finished=false;
   const finish=()=>{
+   if(finished)return;
+   finished=true;
    focusTab.current=true;
    location.hash=flight.destination.hash;
    setMode(flight.destination.mode);
    setFlight(null);
   };
-  if(!target||!card.current?.animate){finish();return}
+  const stage=overlay.current, moving=card.current;
+  if(!target||!stage||!moving){finish();return}
 
+  const from=flight.rect;
+  const aim=()=>{
+   const to=target.getBoundingClientRect();
+   moving.style.setProperty('--flight-x',(to.left-from.left)+'px');
+   moving.style.setProperty('--flight-y',(to.top-from.top)+'px');
+   moving.style.setProperty('--flight-scale-x',to.width/from.width);
+   moving.style.setProperty('--flight-scale-y',to.height/from.height);
+  };
+  const preventScroll=e=>e.preventDefault();
+  const arrived=e=>{if(e.target===moving&&e.animationName==='welcome-travel')finish()};
   window.scrollTo(0,0);
-  const to=target.getBoundingClientRect(),from=flight.rect;
-  const land='translate('+(to.left-from.left)+'px,'+(to.top-from.top)+'px) scale('+to.width/from.width+','+to.height/from.height+')';
-  const motion=card.current.animate(
-   [{transform:'none'},{transform:land}],
-   {duration:580,easing:'cubic-bezier(.62,.02,.28,1)',fill:'forwards'}
-  );
-  const fadeCard=card.current.animate([{opacity:1},{opacity:0}],{delay:475,duration:105,fill:'forwards'});
-  const reveal=cover.current.animate([{opacity:1},{opacity:0}],{delay:410,duration:170,fill:'forwards'});
-  motion.onfinish=finish;
-  window.addEventListener('resize',finish,{once:true});
+  aim();
+  moving.addEventListener('animationend',arrived);
+  stage.addEventListener('wheel',preventScroll,{passive:false});
+  window.addEventListener('resize',aim);
+  window.addEventListener('scroll',aim);
+  stage.dataset.ready='true';
+  const fallback=window.setTimeout(finish,1200);
   return()=>{
-   motion.onfinish=null;
-   motion.cancel();fadeCard.cancel();reveal.cancel();
-   window.removeEventListener('resize',finish);
+   window.clearTimeout(fallback);
+   moving.removeEventListener('animationend',arrived);
+   stage.removeEventListener('wheel',preventScroll);
+   window.removeEventListener('resize',aim);
+   window.removeEventListener('scroll',aim);
+   delete stage.dataset.ready;
   };
  },[flight,mode]);
 
  function choose(event,destination){
-  if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(event.defaultPrevented||event.button>0||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   event.preventDefault();
   if(flight)return;
   const el=event.currentTarget;
@@ -63,8 +78,8 @@ export default function WelcomeEntry({renderGuide}){
  if(!mode&&!flight)return <Welcome onChoose={choose}/>;
  return <>
   <div ref={guide} inert={flight?true:undefined}>{renderGuide(mode??flight.destination.mode)}</div>
-  {flight&&<div className="welcome-transition" aria-hidden="true">
-   <div className="welcome-transition-cover" ref={cover} inert><Welcome departing={flight.destination.hash}/></div>
+  {flight&&<div className="welcome-transition" ref={overlay} aria-hidden="true">
+   <div className="welcome-transition-cover" inert><Welcome departing={flight.destination.hash}/></div>
    <div className="welcome-menu-link welcome-flight-card" ref={card} style={{left:flight.rect.left,top:flight.rect.top,width:flight.rect.width,height:flight.rect.height,fontSize:flight.fontSize}}>
     <Glass/><span>{flight.destination.title}</span>
    </div>

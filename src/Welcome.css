@@ -29,3 +29,14 @@
 .welcome-transition-cover .welcome-menu-link[data-departing]{visibility:hidden}
 .welcome-flight-card{position:fixed;min-height:0;padding:0;transform-origin:top left;pointer-events:none}
 @keyframes welcome-depart{to{opacity:0}}
+.welcome-transition{--flight-duration:820ms}
+.welcome-transition[data-ready] .welcome-transition-cover{animation:welcome-reveal var(--flight-duration) linear both}
+.welcome-transition[data-ready] .welcome-flight-card{animation:welcome-travel var(--flight-duration) linear both}
+@keyframes welcome-reveal{0%,74%{opacity:1}100%{opacity:0}}
+@keyframes welcome-travel{
+ 0%{transform:none;opacity:1;animation-timing-function:cubic-bezier(.42,.03,.22,1)}
+ 100%{transform:translate(var(--flight-x),var(--flight-y)) scale(var(--flight-scale-x),var(--flight-scale-y));opacity:1}
+}
+.welcome-transition[data-ready] .welcome-flight-card>span{animation:welcome-settle var(--flight-duration) linear both}
+.welcome-transition[data-ready] .welcome-flight-card::after{animation:welcome-settle var(--flight-duration) linear both}
+@keyframes welcome-settle{0%,84%{opacity:1}100%{opacity:0}}
