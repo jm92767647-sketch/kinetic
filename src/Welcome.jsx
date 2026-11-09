@@ -15,12 +15,28 @@ export default function WelcomeEntry({renderGuide}){
  return mode?renderGuide(mode):<Welcome/>;
 }
 
+function moveLight(e){
+ if(e.pointerType!=='mouse')return;
+ const {style}=e.currentTarget;
+ const rect=e.currentTarget.getBoundingClientRect();
+ style.setProperty('--light-x',100*(e.clientX-rect.left)/rect.width+'%');
+ style.setProperty('--light-y',100*(e.clientY-rect.top)/rect.height+'%');
+}
+
+function clearLight(e){
+ e.currentTarget.style.removeProperty('--light-x');
+ e.currentTarget.style.removeProperty('--light-y');
+}
+
 function Welcome(){
  return <div className="welcome-screen">
   <header className="app-header welcome-header"><a className="brand" href="./">kinetic<span>.</span></a></header>
   <main className="welcome-main">
    <nav className="welcome-menu" aria-label="시작화면 보기 선택">
-    {destinations.map(x=><a key={x.hash} className="welcome-menu-link" href={x.hash}>{x.title}</a>)}
+    {destinations.map(x=><a key={x.hash} className="welcome-menu-link" href={x.hash} onPointerMove={moveLight} onPointerLeave={clearLight}>
+     <span className="welcome-glass" aria-hidden="true"><span className="welcome-glint"/><span className="welcome-rim"/><span className="welcome-caustic"/></span>
+     <span>{x.title}</span>
+    </a>)}
    </nav>
   </main>
  </div>;
