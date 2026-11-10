@@ -72,7 +72,7 @@ export default function WelcomeEntry({renderGuide}){
   event.preventDefault();
   if(flight)return;
   const el=event.currentTarget;
-  setFlight({destination,rect:el.getBoundingClientRect(),fontSize:getComputedStyle(el).fontSize});
+  setFlight({destination,rect:el.getBoundingClientRect()});
  }
 
  if(!mode&&!flight)return <Welcome onChoose={choose}/>;
@@ -80,8 +80,8 @@ export default function WelcomeEntry({renderGuide}){
   <div ref={guide} inert={flight?true:undefined}>{renderGuide(mode??flight.destination.mode)}</div>
   {flight&&<div className="welcome-transition" ref={overlay} aria-hidden="true">
    <div className="welcome-transition-cover" inert><Welcome departing={flight.destination.hash}/></div>
-   <div className="welcome-menu-link welcome-flight-card" ref={card} style={{left:flight.rect.left,top:flight.rect.top,width:flight.rect.width,height:flight.rect.height,fontSize:flight.fontSize}}>
-    <Glass/><span>{flight.destination.title}</span>
+   <div className="welcome-menu-link welcome-flight-card" ref={card} style={{left:flight.rect.left,top:flight.rect.top,width:flight.rect.width,height:flight.rect.height}}>
+    <Glass/>
    </div>
   </div>}
  </>;
