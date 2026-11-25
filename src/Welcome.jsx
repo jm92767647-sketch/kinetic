@@ -39,33 +39,19 @@ export default function WelcomeEntry({renderGuide}){
    setMode(flight.destination.mode);
    setFlight(null);
   };
-  const stage=overlay.current, moving=card.current;
-  if(!target||!stage||!moving){finish();return}
-
-  const from=flight.rect;
-  const aim=()=>{
-   const to=target.getBoundingClientRect();
-   moving.style.setProperty('--flight-x',(to.left-from.left)+'px');
-   moving.style.setProperty('--flight-y',(to.top-from.top)+'px');
-   moving.style.setProperty('--flight-scale-x',to.width/from.width);
-   moving.style.setProperty('--flight-scale-y',to.height/from.height);
-  };
+  const stage=overlay.current;
+  if(!stage){finish();return}
   const preventScroll=e=>e.preventDefault();
-  const arrived=e=>{if(e.target===moving&&e.animationName==='welcome-travel')finish()};
+  const handedOver=e=>{if(e.target===stage&&e.animationName==='welcome-handoff')finish()};
   window.scrollTo(0,0);
-  aim();
-  moving.addEventListener('animationend',arrived);
+  stage.addEventListener('animationend',handedOver);
   stage.addEventListener('wheel',preventScroll,{passive:false});
-  window.addEventListener('resize',aim);
-  window.addEventListener('scroll',aim);
   stage.dataset.ready='true';
-  const fallback=window.setTimeout(finish,1200);
+  const fallback=window.setTimeout(finish,1600);
   return()=>{
    window.clearTimeout(fallback);
-   moving.removeEventListener('animationend',arrived);
+   stage.removeEventListener('animationend',handedOver);
    stage.removeEventListener('wheel',preventScroll);
-   window.removeEventListener('resize',aim);
-   window.removeEventListener('scroll',aim);
    delete stage.dataset.ready;
   };
  },[flight,mode]);
@@ -80,10 +66,10 @@ export default function WelcomeEntry({renderGuide}){
 
  if(!mode&&!flight)return <Welcome onChoose={choose}/>;
  return <>
-  <div ref={guide} inert={flight?true:undefined}>{renderGuide(mode??flight.destination.mode)}</div>
+  <div ref={guide} className={flight?'welcome-arriving':undefined} inert={flight?true:undefined}>{renderGuide(mode??flight.destination.mode)}</div>
   {flight&&<div className="welcome-transition" ref={overlay} aria-hidden="true">
    <div className="welcome-transition-cover" inert><Welcome departing={flight.destination.hash}/></div>
-   <div className="welcome-menu-link welcome-flight-card" ref={card} style={{left:flight.rect.left,top:flight.rect.top,width:flight.rect.width,height:flight.rect.height}}>
+   <div className="welcome-menu-link welcome-flight-card" ref={card} style={{'--from-x':`${flight.rect.left}px`,'--from-y':`${flight.rect.top}px`,'--from-w':`${flight.rect.width}px`,'--from-h':`${flight.rect.height}px`,left:flight.rect.left,top:flight.rect.top,width:flight.rect.width,height:flight.rect.height}}>
     <Glass/>
    </div>
   </div>}
