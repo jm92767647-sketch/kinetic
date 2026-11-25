@@ -5,10 +5,10 @@ import './Welcome.css';
 const asset=path=>`${import.meta.env.BASE_URL}${path}`;
 const trainingTypes=Object.keys(trainingGroups);
 const destinations=[
- {title:'By Day Routine',mode:'데이별',hash:'#day',note:`데이별 · ${days.length} days`,chips:days.slice(0,2),more:days.length-2,figure:'media/exercises/lyfta-004-video-cutout.webp'},
- {title:'By Muscle Group',mode:'부위별',hash:'#muscle',note:`부위별 · ${muscles.length} muscles`,chips:muscles.slice(0,3),more:muscles.length-3,figure:'media/exercises/lyfta-023-video-cutout.webp'},
- {title:'By Training Type',mode:'훈련능력별',hash:'#training',note:`훈련능력별 · ${trainingTypes.length} types`,chips:trainingTypes.slice(0,3).map(x=>x.replace('(근비대)','')),more:trainingTypes.length-3,figure:'media/exercises/lyfta-047-video-cutout.webp'},
- {title:'Training Matrix',mode:'구성표',hash:'#matrix',note:'구성표 · 전체 프로그램',chips:['한눈에 보기'],more:0,figure:'media/exercises/lyfta-042-video-cutout.webp'},
+ {title:'By Day Routine',mode:'데이별',hash:'#day',note:`데이별 · ${days.length} days`,chips:days.slice(0,2),more:days.length-2,figure:'media/welcome/day.webp'},
+ {title:'By Muscle Group',mode:'부위별',hash:'#muscle',note:`부위별 · ${muscles.length} muscles`,chips:muscles.slice(0,3),more:muscles.length-3,figure:'media/welcome/muscle.webp'},
+ {title:'By Training Type',mode:'훈련능력별',hash:'#training',note:`훈련능력별 · ${trainingTypes.length} types`,chips:trainingTypes.slice(0,3).map(x=>x.replace('(근비대)','')),more:trainingTypes.length-3,figure:'media/welcome/training.webp'},
+ {title:'Training Matrix',mode:'구성표',hash:'#matrix',note:'구성표 · 전체 프로그램',chips:['한눈에 보기'],more:0,figure:'media/welcome/matrix.webp'},
 ];
 const currentMode=()=>destinations.find(x=>x.hash===location.hash)?.mode||(location.hash==='#exercise-browser'?'데이별':null);
 

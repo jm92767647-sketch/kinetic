@@ -16,7 +16,7 @@
 .welcome-card-note{display:block;margin-top:clamp(8px,1.4svh,14px);font-size:clamp(13px,1.05vw,15px);color:#8198aa}
 .welcome-card-chips{display:flex;flex-wrap:wrap;gap:7px;max-width:54%}
 .welcome-card-chips span{font-size:clamp(11.5px,.92vw,13px);line-height:1.6;color:#5f87a6;background:#ffffff85;border:1px solid #ffffffcc;border-radius:20px;padding:5px 12px;white-space:nowrap}
-.welcome-card-figure{position:absolute;right:clamp(10px,2vw,34px);bottom:clamp(8px,1.4svh,16px);height:76%;width:auto;max-width:42%;object-fit:contain;object-position:bottom right;pointer-events:none;user-select:none}
+.welcome-card-figure{position:absolute;right:clamp(14px,3vw,52px);bottom:clamp(14px,2.4svh,26px);height:min(78%,330px);width:auto;max-width:40%;object-fit:contain;object-position:bottom center;pointer-events:none;user-select:none}
 .welcome-card-go{position:absolute;right:clamp(20px,2vw,30px);top:clamp(18px,2.6svh,30px);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#fff;background:#2268a6;opacity:0;transform:scale(.8);transition:opacity .18s,transform .18s;pointer-events:none}
 .welcome-menu-link:hover .welcome-card-go,.welcome-menu-link:focus-visible .welcome-card-go{opacity:1;transform:none}
 .welcome-glass{position:absolute;z-index:-1;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit;border:1px solid #ffffffd9;background:radial-gradient(ellipse at var(--light-x,28%) var(--light-y,12%),#ffffff91 0%,#ffffff19 50%,transparent 75%),linear-gradient(132deg,#ffffff75 0%,#ffffff25 32%,#c9dfef33 68%,#ffffff7d 100%);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2);box-shadow:inset 0 2px 2px #fffffff2,inset 2px 0 3px #ffffff91,inset -2px -1px 4px #79a9c63d,inset 0 -2px 3px #91bad54d,0 17px 28px -15px #527c9b52,0 6px 12px -9px #345a7466}
@@ -27,7 +27,7 @@
 @media(max-width:1000px){
  .welcome-card-body{max-width:66%}
  .welcome-card-chips{display:none}
- .welcome-card-figure{height:64%;max-width:34%}
+ .welcome-card-figure{height:min(66%,240px);max-width:30%;right:24px}
 }
 @media(max-width:700px){
  .welcome-header{padding:20px 20px}
@@ -40,7 +40,7 @@
  .welcome-card-title{font-size:clamp(23px,6.6vw,27px)}
  .welcome-card-note{margin-top:6px;font-size:11.5px}
  .welcome-card-body{max-width:64%}
- .welcome-card-figure{height:86%;max-width:30%;right:52px;bottom:6px}
+ .welcome-card-figure{height:72%;max-width:24%;right:58px;bottom:12px}
  .welcome-card-go{width:30px;height:30px;font-size:13px;right:16px;top:auto;bottom:16px;opacity:1;transform:none;background:#2268a640;color:#ffffffe6}
  .welcome-menu-link:hover .welcome-card-go{background:#2268a6}
  .welcome-glass{backdrop-filter:none;-webkit-backdrop-filter:none}
