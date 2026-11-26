@@ -114,7 +114,6 @@ function Welcome({onChoose,departing}){
       {x.more>0&&<span>+{x.more}</span>}
      </span>
      <img className="welcome-card-figure" src={asset(x.figure)} alt="" loading="lazy" decoding="async"/>
-     <span className="welcome-card-go" aria-hidden="true">→</span>
     </a>)}
    </nav>
   </main>
